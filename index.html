@@ -295,14 +295,54 @@
       </footer>
       <!-- end footer -->
       <!-- Javascript files-->
-      <script src="./src/js/jquery.min.js"></script>
-      <script src="./src/js/popper.min.js"></script>
-      <script src="./src/js/bootstrap.bundle.min.js"></script>
-      <script src="./src/js/jquery-3.0.0.min.js"></script>
-      <script src="./src/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="./src/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="./src/js/custom.js"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         document.addEventListener("DOMContentLoaded", function () {
+            var myCarousel = document.getElementById("myCarousel");
+            var carouselInstance = new Carousel(myCarousel);
+         });
+      
+         function Carousel(carouselElement) {
+            this.carouselElement = carouselElement;
+            this.currentSlide = 0;
+      
+            this.init = function () {
+               this.carouselElement.addEventListener("click", this.handleCarouselClick.bind(this));
+               this.showSlide(this.currentSlide);
+            };
+      
+            this.handleCarouselClick = function (event) {
+               if (event.target.classList.contains("carousel-control-prev")) {
+                  this.prevSlide();
+               } else if (event.target.classList.contains("carousel-control-next")) {
+                  this.nextSlide();
+               }
+            };
+      
+            this.prevSlide = function () {
+               this.currentSlide = (this.currentSlide - 1 + this.getNumSlides()) % this.getNumSlides();
+               this.showSlide(this.currentSlide);
+            };
+      
+            this.nextSlide = function () {
+               this.currentSlide = (this.currentSlide + 1) % this.getNumSlides();
+               this.showSlide(this.currentSlide);
+            };
+      
+            this.showSlide = function (slideIndex) {
+               var slides = this.carouselElement.querySelectorAll(".carousel-item");
+               for (var i = 0; i < slides.length; i++) {
+                  slides[i].classList.remove("active");
+               }
+               slides[slideIndex].classList.add("active");
+            };
+      
+            this.getNumSlides = function () {
+               return this.carouselElement.querySelectorAll(".carousel-item").length;
+            };
+      
+            // Inicializar el carrusel
+            this.init();
+         }
+      </script>
    </body>
 </html>
