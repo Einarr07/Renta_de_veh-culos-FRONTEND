@@ -1,54 +1,75 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+// Importación de imagenes
+import logoImage from '../assets/images/logo.png';
+import car1Image from '../assets/images/car_img1.png';
+import car2Image from '../assets/images/car_img2.png';
+import car3Image from '../assets/images/car_img3.png';
+import mateoImage from '../assets/images/foto_mateo.jpg';
+import andyImage from '../assets/images/foto_Andy.jpeg';
+import comillasImage from '../assets/images/te1.png'
 
 export const LandingPage = () => {
+   const sliderRef = useRef(null);
+
+  useEffect(() => {
+    // Configuración del carrusel para que se mueva automáticamente cada 5 segundos
+    const interval = setInterval(() => {
+      sliderRef.current.slickNext();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
-      <body className="main-layout">
-        <header>
-         <div class="header">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                     <div class="full">
-                        <div class="center-desk">
-                           <div class="logo">
-                              <a href="index.html"><img src="./src/assets/images/logo.png" alt="#" /></a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarsExample04">
-                           <ul class="navbar-nav mr-auto">
-                              <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Página principal</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="#nosotros">¿Por qué nosotros?</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="#proyectos">Otros proyectos</a>
-                              </li>
-                              <li class="sign_btn">
-                                <Link to="/login" href="#">Iniciar sesión</Link>
-                              </li>
-                           </ul>
-                        </div>
-                     </nav>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </header>
-      <section class="banner_main">
-         <div class="container">
-            <div class="row d_flex">
-               <div class="col-md-12">
-                  <div class="text-bg">
+      <div className="main-layout">
+        <header className="bg-gray-800 text-white">
+  <div className="container mx-auto flex items-center justify-between p-4">
+    <div className="logo">
+      <Link to="/">
+        <img src={logoImage} alt="logo de la empresa" className="w-16" />
+      </Link>
+    </div>
+    <nav className="hidden md:flex items-center space-x-4">
+  <ul className="flex space-x-4">
+    <li>
+      <Link to="/" className="hover:text-gray-300 text-dark text-base px-4 py-2 uppercase">Página principal</Link>
+    </li>
+    <li>
+      <a href="#nosotros" className="hover:text-gray-300 text-dark text-base px-4 py-2 uppercase">¿Por qué nosotros?</a>
+    </li>
+    <li>
+      <a href="#proyectos" className="hover:text-gray-300 text-dark text-base px-4 py-2 uppercase">Otros proyectos</a>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+    <div className="sign_btn">
+      <Link to="/login" className="text-white bg-blue-500 px-4 py-2 rounded mr-4">Iniciar sesión</Link>
+    </div>
+  </div>
+</header>
+
+
+      <section className="banner_main">
+         <div className="container">
+            <div className="row d_flex">
+               <div className="col-md-12">
+                  <div className="text-bg">
                      <h1>Encuentra o renta el mejor vehículo</h1>
                      <strong>La mejor decisión la tienes tu</strong>
                      <span>CarGod operando desde 2023</span>
@@ -68,43 +89,43 @@ export const LandingPage = () => {
             </div>
          </div>
       </section>
-      <div  class="car">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
+      <div  className="car">
+         <div className="container">
+            <div className="row">
+               <div className="col-md-12">
+                  <div className="titlepage">
                      <h2>Variedad de vehículos</h2>
                      <span>Explora nuestra amplia gama de vehículos para encontrar la opción perfecta que se adapte a tu estilo y necesidades.</span>
                   </div>
                </div>
             </div>
-            <div class="row">
-               <div class="col-md-4 padding_leri">
-                  <div class="car_box">
-                     <figure><img src="./src/assets/images/car_img1.png" alt="#"/></figure>
+            <div className="row">
+               <div className="col-md-4 padding_leri">
+                  <div className="car_box">
+                     <figure><img src={car1Image} alt="#"/></figure>
                      <h3>Hyundai</h3>
                   </div>
                </div>
-               <div class="col-md-4 padding_leri">
-                  <div class="car_box">
-                     <figure><img src="./src/assets/images/car_img2.png" alt="#"/></figure>
+               <div className="col-md-4 padding_leri">
+                  <div className="car_box">
+                     <figure><img src={car2Image} alt="#"/></figure>
                      <h3>Audi</h3>
                   </div>
                </div>
-               <div class="col-md-4 padding_leri">
-                  <div class="car_box">
-                     <figure><img src="./src/assets/images/car_img3.png" alt="#"/></figure>
+               <div className="col-md-4 padding_leri">
+                  <div className="car_box">
+                     <figure><img src={car3Image} alt="#"/></figure>
                      <h3>Bmw x5</h3>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <div class="choose ">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
+      <div className="choose ">
+         <div className="container">
+            <div className="row">
+               <div className="col-md-12">
+                  <div className="titlepage">
                      <h2 id="nosotros">¿Por qué nosotros?</h2>
                      <span>
                         Somos una empresa comprometida en proporcionar a nuestros clientes una experiencia de conducción excepcional.
@@ -114,9 +135,9 @@ export const LandingPage = () => {
                   </div>
                </div>
             </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="choose_box">
+            <div className="row">
+               <div className="col-md-12">
+                  <div className="choose_box">
                      <span>01</span>
                      <p>
                         <strong>Variedad de Opciones:</strong> Nuestra extensa flota abarca desde autos compactos hasta opciones más amplias, 
@@ -124,8 +145,8 @@ export const LandingPage = () => {
                      </p>
                   </div>
                </div>
-               <div class="col-md-12">
-                  <div class="choose_box">
+               <div className="col-md-12">
+                  <div className="choose_box">
                      <span>02</span>
                      <p>
                         <strong>Tarifas Competitivas:</strong>Ofrecemos tarifas competitivas y transparentes, sin costos ocultos ni sorpresas desagradables. 
@@ -133,8 +154,8 @@ export const LandingPage = () => {
                      </p>
                   </div>
                </div>
-               <div class="col-md-12">
-                  <div class="choose_box">
+               <div className="col-md-12">
+                  <div className="choose_box">
                      <span>03</span>
                      <p>
                         <strong>Proceso de Reserva Sencillo:</strong>Hacemos que la reserva de tu vehículo sea fácil y rápida. Con nuestro proceso de reserva intuitivo, 
@@ -145,84 +166,73 @@ export const LandingPage = () => {
             </div>
          </div>
       </div>
-      <div class="cutomer">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Desarrolladores del proyecto</h2>
-                  </div>
-               </div>
+      <div className="cutomer">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="titlepage">
+                <h2>Desarrolladores del proyecto</h2>
+              </div>
             </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div id="myCarousel" class="carousel slide cutomer_Carousel " data-ride="carousel" data-interval="5000">
-                     <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                     </ol>
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <div class="container">
-                              <div class="carousel-caption ">
-                                 <div class="desarrolladores">
-                                    <figure><img src="./src/assets/images/foto_mateo.jpg" alt="#"/></figure>
-                                 </div>
-                                 <div class="our cross_layout">
-                                    <div class="test_box">
-                                       <h4>Mateo Congo</h4>
-                                       <span>FrontEnd</span>
-                                       <p>
-                                          Estudiante de la carrera de Desarrollo de Software en la Escuela Politécnica Nacional
-                                       </p>
-                                       <i><img src="./src/assets/images/te1.png" alt="#"/></i>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="desarrolladores">
-                                    <figure><img src="./src/assets/images/foto_Andy.jpeg" alt="#"/></figure>
-                                 </div>
-                                 <div class="our cross_layout">
-                                    <div class="test_box">
-                                       <h4>Andy Loor</h4>
-                                       <span>BackEnd</span>
-                                       <p>
-                                          Estudiante de la carrera de Desarrollo de Software en la Escuela Politécnica Nacional
-                                       </p>
-                                       <i><img src="./src/assets/images/te1.png" alt="#"/></i>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        
-                     </div>
-                     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Previous</span>
-                     </a>
-                     <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Next</span>
-                     </a>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+               <div id="myCarousel" className="carousel slide cutomer_Carousel" data-ride="carousel" data-interval="5000">
+                  <Slider {...settings} ref={sliderRef}>
+                   <div className="carousel-item text-center">
+                  <div className="container">
+                  <div className="carousel-caption">
+                  <div className="desarrolladores flex items-center justify-center">
+                   <figure><img src={mateoImage} alt="#"/></figure>
                   </div>
-               </div>
+              <div className="our cross_layout mx-auto">
+                <div className="test_box">
+                  <h4>Mateo Congo</h4>
+                  <span>FrontEnd</span>
+                  <p>
+                    Estudiante de la carrera de Desarrollo de Software en la Escuela Politécnica Nacional
+                  </p>
+                  <i className="flex items-center justify-center"><img src={comillasImage} alt="#"/></i>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+        <div className="carousel-item text-center">
+          <div className="container">
+            <div className="carousel-caption">
+              <div className="desarrolladores flex items-center justify-center">
+                <figure><img src={andyImage} alt="#"/></figure>
+              </div>
+              <div className="our cross_layout mx-auto">
+                <div className="test_box">
+                  <h4>Andy Loor</h4>
+                  <span>BackEnd</span>
+                  <p>
+                    Estudiante de la carrera de Desarrollo de Software en la Escuela Politécnica Nacional
+                  </p>
+                  <i className="flex items-center justify-center"><img src={comillasImage} alt="#"/></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Slider>
          </div>
       </div>
+      </div>
+
+
+        </div>
+      </div>
       <footer>
-         <div class="footer">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="cont_call">
+         <div className="footer">
+            <div className="container">
+               <div className="row">
+                  <div className="col-md-12">
+                     <div className="cont_call">
                         <h3 id="proyectos"> 
-                           <strong class="multi color_chang">
+                           <strong className="multi color_chang">
                               Revisa otros proyectos
                            </strong><br/>
                            <a href="https://github.com/Einarr07" target="_blank">
@@ -236,10 +246,10 @@ export const LandingPage = () => {
                   </div>
                </div>
             </div>
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
+            <div className="copyright">
+               <div className="container">
+                  <div className="row">
+                     <div className="col-md-12">
                         <p>Trabajo de integración curricular</p>
                      </div>
                   </div>
@@ -247,6 +257,6 @@ export const LandingPage = () => {
             </div>
          </div>
       </footer>
-      </body>
+      </div>
   );
 };
