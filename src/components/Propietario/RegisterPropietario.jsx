@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Mensaje from '../Alertas/Mensaje';
 import axios from 'axios';
-import vehiculosPropietarios from "../../assets/images/vehiculosPropietarios.png";
+import vehiculosPropietarios from "../../assets/images/vehiculosPropietarios.jpeg";
 export const RegisterPropietario = () => {
     const [mensaje, setMensaje] = useState({})
     const [form, setForm] = useState({
@@ -87,7 +87,9 @@ export const RegisterPropietario = () => {
   <div className="w-full md:w-1/2 h-screen">
     <div className="md:w-4/5 sm:w-full">
       <h1 className="text-3xl font-semibold mb-2 text-center uppercase text-gray-500">Bienvenido</h1>
-      <small className="text-gray-400 block my-4 text-sm">Ingresa tus datos para poder registrarte.</small>
+      <small className="text-gray-400 block my-4 text-sm">Como propietario tienes la opción de poder rentar vehículos a 
+      nuestros clientes.
+      <br />Ingresa tus datos para poder registrarte:</small>
       {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
       <form onSubmit={handleSubmit}>
                         <div className="mb-3">

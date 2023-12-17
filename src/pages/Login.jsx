@@ -23,15 +23,22 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Lógica de autenticación aquí
-    // ...
-
-    // Ejemplo de redirección
-    navigate('/dashboard');
-  };
-
+    try {
+        const url = `${import.meta.env.VITE_BACKEND_URL}/login`
+        const respuesta= await axios.post(url,form)
+        localStorage.setItem('token',respuesta.data.token)
+        setAuth(respuesta.data)
+        navigate('/dashboard')
+    } catch (error) {
+        setMensaje({respuesta:error.response.data.msg,tipo:false})
+        setform({})
+        setTimeout(() => {
+            setMensaje({})
+        }, 3000);
+    };
+};
   const handleRegisterClick = (role) => {
     setSelectedRole(role);
   };
@@ -58,7 +65,7 @@ const Login = () => {
               Bienvenido
             </h1>
             <small className="text-gray-400 block my-4 text-sm">
-              Bienvenido de nuevo! Por favor ingresa tus datos
+              Por favor ingresa tus datos
             </small>
 
             <form onSubmit={handleSubmit} className="w-full max-w-md">
