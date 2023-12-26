@@ -20,12 +20,15 @@ export const Forgot = () => {
     e.preventDefault();
 
     try {
-      const url = `${import.meta.env.VITE_BACKEND_URL}/recuperar-password`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/forgot-password`;
       const respuesta = await axios.post(url, mail);
-      setMensaje({ respuesta: respuesta.data.msg, tipo: true });
+      setMensaje({ 
+        respuesta: respuesta.data.msg || "Revisa tu correo electronico, para restablecer la contraseña",
+        tipo: true });
       setMail("");
     } catch (error) {
-      setMensaje({ respuesta: error.response.data.msg, tipo: false });
+      setMensaje({ respuesta: error.response.data.msg || "Lo sentimos el usuario no se encuentra registrado", 
+      tipo: false });
     }
   };
 

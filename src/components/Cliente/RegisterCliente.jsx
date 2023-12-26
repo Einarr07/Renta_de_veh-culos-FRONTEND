@@ -8,16 +8,18 @@ export const RegisterCliente = () => {
     const [form, setForm] = useState({
         nombre: "",
         apellido: "",
+        cedula: "",
         direccion: "",
-        telefono: "",
+        celular: "",
         email: "",
         password: ""
     })
     // Estados para la longitud de los campos
     const [nombreLength, setNombreLength] = useState(0);
     const [apellidoLength, setApellidoLength] = useState(0);
+    const [cedulaLength, setCedulaLength] = useState(0);
     const [direccionLength, setDireccionLength] = useState(0);
-    const [telefonoLength, setTelefonoLength] = useState(0);
+    const [celularLength, setCelularLength] = useState(0);
     const [emailLength, setEmailLength] = useState(0);
     const [passwordLength, setPasswordLength] = useState(0);
 
@@ -26,14 +28,15 @@ export const RegisterCliente = () => {
         const maxLengths = {
             nombre: 30,
             apellido: 30,
+            cedula: 10,
             direccion: 60,
-            telefono: 10,
+            celular: 10,
             email: 50, 
             password: 20 
         };
 
         // Validar si el campo de teléfono solo contiene números
-        if (e.target.name === "telefono" && !/^\d*$/.test(newValue)) {
+        if (e.target.name === "celular" && !/^\d*$/.test(newValue)) {
             return; // Si no son números, no actualices el estado
         }
 
@@ -54,8 +57,11 @@ export const RegisterCliente = () => {
                 case "direccion":
                     setDireccionLength(newValue.length);
                     break;
-                case "telefono":
-                    setTelefonoLength(newValue.length);
+                case "cedula":
+                    setCedulaLength(newValue.length);
+                    break;
+                case "celular":
+                    setCelularLength(newValue.length);
                     break;
                 case "email":
                     setEmailLength(newValue.length);
@@ -70,25 +76,57 @@ export const RegisterCliente = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const url = `${import.meta.env.VITE_BACKEND_URL}/registro`
-            const respuesta = await axios.post(url, form)
-            setMensaje({ respuesta: respuesta.data.msg, tipo: true })
-            setForm({})
+            const url = `${import.meta.env.VITE_BACKEND_URL}/registro`;
+    
+            // Agregar el campo "role" al objeto form
+            const formWithRole = {
+                ...form,
+                role: "cliente", 
+            };
+    
+            const respuesta = await axios.post(url, formWithRole);
+    
+            setMensaje({ 
+                respuesta: respuesta.data.msg || "Ya puedes iniciar sesión", 
+                tipo: true 
+            });
+            setForm({});
         } catch (error) {
-            setMensaje({ respuesta: error.response.data.msg, tipo: false })
+            console.error("Error en la solicitud:", error);
+            if (error.response) {
+                console.error("Respuesta del servidor con error:", error.response.data);
+                setMensaje({ 
+                    respuesta: error.response?.data.msg || "Respuesta erronea del servidor", 
+                    tipo: false 
+                });
+            } else if (error.request) {
+                console.error("No se recibió respuesta del servidor:", error.request);
+                setMensaje({ 
+                    respuesta: error.response?.data.msg || "No se recibió respuesta del servidor",
+                    tipo: false 
+                });
+            } else {
+                console.error("Error durante la solicitud:", error.message);
+                setMensaje({ 
+                    respuesta: error.response?.data.msg || "Error durante la solicitud",
+                    tipo: false 
+                });
+            }
         }
-    }
-
+    };
+    
+    
     return (
         <>
             <div className="bg-white min-h-screen flex justify-center items-center">
   <div className="w-full md:w-1/2 h-screen">
     <div className="md:w-4/5 sm:w-full">
       <h1 className="text-3xl font-semibold mb-2 text-center uppercase text-gray-500">Bienvenido</h1>
-      <small className="text-gray-400 block my-4 text-sm">Con el rol de cliente tu puedes alquilar vehículos
-      <br />Ingresa tus datos para poder registrarte.</small>
+      <small className="text-gray-400 block my-4 text-sm">Como propietario tienes la opción de poder rentar vehículos a 
+      nuestros clientes.
+      <br />Ingresa tus datos para poder registrarte:</small>
       {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
       <form onSubmit={handleSubmit}>
                         <div className="mb-3">
@@ -110,6 +148,15 @@ export const RegisterCliente = () => {
                         </div>
 
                         <div className="mb-3">
+                            <label className="mb-2 block text-sm font-semibold" htmlFor="cedula">
+                                Cédula ({cedulaLength}/10):
+                            </label>
+                            <input type="tel" id="cedula" name='cedula'
+                                value={form.cedula || ""} onChange={handleChange}
+                                placeholder="Ingresa tu cédula" className="block w-full rounded-md border border-gray-300 focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500" required />
+                        </div>
+
+                        <div className="mb-3">
                             <label className="mb-2 block text-sm font-semibold" htmlFor="direccion">
                                 Dirección ({direccionLength}/60):
                             </label>
@@ -119,12 +166,12 @@ export const RegisterCliente = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="mb-2 block text-sm font-semibold" htmlFor="telefono">
-                                Teléfono ({telefonoLength}/10):
+                            <label className="mb-2 block text-sm font-semibold" htmlFor="celular">
+                                Celular ({celularLength}/10):
                             </label>
-                            <input type="tel" id="telefono" name='telefono'
-                                value={form.telefono || ""} onChange={handleChange}
-                                placeholder="Ingresa tu teléfono" className="block w-full rounded-md border border-gray-300 focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500" required />
+                            <input type="tel" id="celular" name='celular'
+                                value={form.celular || ""} onChange={handleChange}
+                                placeholder="Ingresa tu celular" className="block w-full rounded-md border border-gray-300 focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500" required />
                         </div>
 
                         <div className="mb-3">

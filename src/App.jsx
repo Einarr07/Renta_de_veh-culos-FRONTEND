@@ -11,6 +11,8 @@ import { RegisterPropietario } from './components/Propietario/RegisterPropietari
 import { RegisterVehiculo } from './pages/RegisterVehiculo';
 import AceeptRequests from './pages/AceeptRequests';
 import { SolicitudesProvider } from './pages/SolicitudesContext';
+import Confirm from './pages/Confirm';
+import Restore from './pages/Restore';
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
           <Route path='/forgot/:id' element={<Forgot />} />
           <Route path='/register/Cliente' element={<RegisterCliente />} />
           <Route path='/register/Propietario' element={<RegisterPropietario />} />
+          <Route path='/confirmar/:token' element={< Confirm/>} />
+          <Route path='/reset-password/:token' element={< Restore/>} />
+
           <Route path='/register/Vehiculo' element={<RegisterVehiculo/>} />
           <Route path='/aceptar-solicitudes' element={<AceeptRequests />} />
         </Routes>

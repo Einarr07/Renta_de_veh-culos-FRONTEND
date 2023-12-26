@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Mensaje from '../components/Alertas/Mensaje';
@@ -23,22 +24,35 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/login`
-        const respuesta= await axios.post(url,form)
-        localStorage.setItem('token',respuesta.data.token)
-        setAuth(respuesta.data)
-        navigate('/dashboard')
+      console.log("Datos enviados al servidor: ", form);
+      const url = `${import.meta.env.VITE_BACKEND_URL}/login`;
+      const respuesta = await axios.post(url, form);
+  
+      if (respuesta && respuesta.data) {
+        localStorage.setItem('token', respuesta.data.token);
+        setAuth(respuesta.data);
+        navigate('/aceptar-solicitudes');
+      } else {
+        console.error('La respuesta o su propiedad "data" no están definidas correctamente.');
+      }
     } catch (error) {
-        setMensaje({respuesta:error.response.data.msg,tipo:false})
-        setform({})
-        setTimeout(() => {
-            setMensaje({})
-        }, 3000);
-    };
-};
+      setMensaje({
+        respuesta: error.response?.data.msg || 'Error de servidor',
+        tipo: false,
+      });
+  
+      setForm({});
+  
+      setTimeout(() => {
+        setMensaje({});
+      }, 3000);
+    }
+  };
+  
+
   const handleRegisterClick = (role) => {
     setSelectedRole(role);
   };
@@ -101,7 +115,7 @@ const Login = () => {
               </div>
 
               <div className="my-4">
-                <button className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">
+              <button className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">
                   Iniciar sesión
                 </button>
               </div>

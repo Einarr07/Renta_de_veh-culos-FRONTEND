@@ -17,13 +17,13 @@ const AceeptRequests = () => {
               <div className="mb-2 text-xl font-semibold">{solicitud.marca}</div>
               <div className="text-gray-600">${solicitud.costoPorDia} por día</div>
               <div style={{ backgroundColor: '#3889B7' }} className="mt-4 flex space-x-2">
-                <button className="bg-green-500 text-black px-4 py-2 rounded-md hover:bg-green-600">
+                <button className="button-green">
                   Más información
                 </button>
-                <button className="bg-blue-500 text-black px-4 py-2 rounded-md hover:bg-blue-600">
+                <button className="button-blue">
                   Aceptar
                 </button>
-                <button className="bg-red-500 text-black px-4 py-2 rounded-md hover:bg-red-600">
+                <button className="button-red">
                   Rechazar
                 </button>
               </div>

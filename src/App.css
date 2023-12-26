@@ -1,10 +1,10 @@
 /*
-! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.6 | Licencia MIT | https://tailwindcss.com
 */
 
 /*
-1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
-2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+1. Evitar que el relleno y el borde afecten el ancho del elemento. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Permitir agregar un borde a un elemento simplemente agregando un ancho de borde. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
 *,
@@ -26,12 +26,12 @@
 }
 
 /*
-1. Use a consistent sensible line-height in all browsers.
-2. Prevent adjustments of font size after orientation changes in iOS.
-3. Use a more readable tab size.
-4. Use the user's configured `sans` font-family by default.
-5. Use the user's configured `sans` font-feature-settings by default.
-6. Use the user's configured `sans` font-variation-settings by default.
+1. Utilizar un interlineado consistente y sensato en todos los navegadores.
+2. Evitar ajustes del tamaño de fuente después de cambios de orientación en iOS.
+3. Utilizar un tamaño de pestaña más legible.
+4. Utilizar la fuente 'sans-serif' configurada por el usuario de forma predeterminada.
+5. Utilizar las configuraciones de características de fuente 'sans-serif' configuradas por el usuario de forma predeterminada.
+6. Utilizar las configuraciones de variación de fuente 'sans-serif' configuradas por el usuario de forma predeterminada.
 */
 
 html {
@@ -42,7 +42,7 @@ html {
   -moz-tab-size: 4;
   /* 3 */
   -o-tab-size: 4;
-     tab-size: 4;
+  tab-size: 4;
   /* 3 */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
@@ -53,8 +53,8 @@ html {
 }
 
 /*
-1. Remove the margin in all browsers.
-2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+1. Eliminar el margen en todos los navegadores.
+2. Heredar el interlineado de 'html' para que los usuarios puedan establecerlos directamente en el elemento 'html'.
 */
 
 body {
@@ -65,9 +65,9 @@ body {
 }
 
 /*
-1. Add the correct height in Firefox.
-2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
-3. Ensure horizontal rules are visible by default.
+1. Agregar la altura correcta en Firefox.
+2. Corregir la herencia del color del borde en Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Asegurar que las reglas horizontales sean visibles por defecto.
 */
 
 hr {
@@ -80,30 +80,62 @@ hr {
 }
 
 /*
-Add the correct text decoration in Chrome, Edge, and Safari.
+Agregar el estilo de texto correcto en Chrome, Edge y Safari.
 */
 
 abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 
 /*
-Remove the default font size and weight for headings.
+Eliminar el tamaño y peso de fuente predeterminados para los encabezados.
 */
 
-h1,
-h2,
-h3,
-h4,
-h5,
+/* Estilo para h1 */
+h1 {
+  font-size: 2rem; /* Tamaño del texto para h1 */
+  font-weight: bold; /* Peso de la fuente para h1 */
+  color: #333; /* Color del texto para h1 */
+}
+
+/* Estilo para h2 */
+h2 {
+  font-size: 1.5rem; /* Tamaño del texto para h2 */
+  font-weight: bold; /* Peso de la fuente para h2 */
+  color: #555; /* Color del texto para h2 */
+}
+
+/* Estilo para h3 */
+h3 {
+  font-size: 1.25rem; /* Tamaño del texto para h3 */
+  font-weight: bold; /* Peso de la fuente para h3 */
+  color: #777; /* Color del texto para h3 */
+}
+
+/* Estilo para h4 */
+h4 {
+  font-size: 1.1rem; /* Tamaño del texto para h4 */
+  font-weight: bold; /* Peso de la fuente para h4 */
+  color: #999; /* Color del texto para h4 */
+}
+
+/* Estilo para h5 */
+h5 {
+  font-size: 1rem; /* Tamaño del texto para h5 */
+  font-weight: bold; /* Peso de la fuente para h5 */
+  color: #aaa; /* Color del texto para h5 */
+}
+
+/* Estilo para h6 */
 h6 {
-  font-size: inherit;
-  font-weight: inherit;
+  font-size: 0.9rem; /* Tamaño del texto para h6 */
+  font-weight: bold; /* Peso de la fuente para h6 */
+  color: #bbb; /* Color del texto para h6 */
 }
 
 /*
-Reset links to optimize for opt-in styling instead of opt-out.
+Restablecer los estilos de los enlaces para optimizar el estilo opcional en lugar del estilo excluido.
 */
 
 a {
@@ -112,7 +144,7 @@ a {
 }
 
 /*
-Add the correct font weight in Edge and Safari.
+Agregar el peso de fuente correcto en Edge y Safari.
 */
 
 b,
@@ -121,10 +153,10 @@ strong {
 }
 
 /*
-1. Use the user's configured `mono` font-family by default.
-2. Use the user's configured `mono` font-feature-settings by default.
-3. Use the user's configured `mono` font-variation-settings by default.
-4. Correct the odd `em` font sizing in all browsers.
+1. Utilizar la fuente 'mono' configurada por el usuario de forma predeterminada.
+2. Utilizar las configuraciones de características de fuente 'mono' configuradas por el usuario de forma predeterminada.
+3. Utilizar las configuraciones de variación de fuente 'mono' configuradas por el usuario de forma predeterminada.
+4. Corregir el extraño tamaño de fuente 'em' en todos los navegadores.
 */
 
 code,
@@ -142,7 +174,7 @@ pre {
 }
 
 /*
-Add the correct font size in all browsers.
+Agregar el tamaño de fuente correcto en todos los navegadores.
 */
 
 small {
@@ -150,7 +182,7 @@ small {
 }
 
 /*
-Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+Evitar que los elementos 'sub' y 'sup' afecten la altura de línea en todos los navegadores.
 */
 
 sub,
@@ -170,9 +202,9 @@ sup {
 }
 
 /*
-1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
-2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
-3. Remove gaps between table borders by default.
+1. Eliminar la sangría del texto de las tablas en Chrome y Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Corregir la herencia del color del borde de la tabla en Chrome y Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Eliminar los espacios entre los bordes de la tabla por defecto.
 */
 
 table {
@@ -185,9 +217,9 @@ table {
 }
 
 /*
-1. Change the font styles in all browsers.
-2. Remove the margin in Firefox and Safari.
-3. Remove default padding in all browsers.
+1. Cambiar los estilos de fuente en todos los navegadores.
+2. Eliminar el margen en Firefox y Safari.
+3. Eliminar el relleno predeterminado en todos los navegadores.
 */
 
 button,
@@ -216,7 +248,7 @@ textarea {
 }
 
 /*
-Remove the inheritance of text transform in Edge and Firefox.
+Eliminar la herencia de la transformación de texto en Edge y Firefox.
 */
 
 button,
@@ -225,24 +257,54 @@ select {
 }
 
 /*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Remove default button styles.
+1. Corregir la imposibilidad de aplicar estilos a tipos clicables en iOS y Safari.
+2. Eliminar los estilos de botón predeterminados.
 */
 
+/* Botones por defecto */
 button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
+  background-color: transparent; /* Fondo transparente */
+  color: #180d0df8; /* Color del texto */
+  padding: 10px 20px; /* Añade relleno para dar espacio interno al botón */
+  margin: 10px; /* Añade margen alrededor del botón */
+  border: 2px solid #3490dc; /* Añade un borde al botón */
+  border-radius: 8px; /* Añade esquinas redondeadas */
+}
+
+/* Estilo de botón para el color verde */
+.button-green {
+  background-color: #28FE05; /* Verde */
+}
+
+/* Estilo de botón para el color rojo */
+.button-red {
+  background-color: #E51D1D; /* Rojo */
+}
+
+/* Estilo de botón para el color azul */
+.button-blue {
+  background-color: #4299e1; /* Azul */
+}
+
+/* Estilo de botón para el color amarillo*/
+.button-yellow{
+  background-color: #E3E72B; /* Amarillo */
+}
+
+/* Aplica el mismo estilo a los botones con la clase "button" */
+.button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: 2px solid #3490dc;
+  border-radius: 8px;
 }
 
 /*
-Use the modern Firefox focus style for all focusable elements.
+Utilizar el estilo de enfoque moderno de Firefox para todos los elementos enfocables.
 */
 
 :-moz-focusring {
@@ -250,7 +312,7 @@ Use the modern Firefox focus style for all focusable elements.
 }
 
 /*
-Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+Eliminar los estilos adicionales ':invalid' en Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
 */
 
 :-moz-ui-invalid {
@@ -258,7 +320,7 @@ Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/
 }
 
 /*
-Add the correct vertical alignment in Chrome and Firefox.
+Agregar la alineación vertical correcta en Chrome y Firefox.
 */
 
 progress {
@@ -266,7 +328,7 @@ progress {
 }
 
 /*
-Correct the cursor style of increment and decrement buttons in Safari.
+Corregir el estilo del cursor de los botones de incremento y decremento en Safari.
 */
 
 ::-webkit-inner-spin-button,
@@ -275,8 +337,8 @@ Correct the cursor style of increment and decrement buttons in Safari.
 }
 
 /*
-1. Correct the odd appearance in Chrome and Safari.
-2. Correct the outline style in Safari.
+1. Corregir la apariencia extraña en Chrome y Safari.
+2. Corregir el estilo del contorno en Safari.
 */
 
 [type='search'] {
