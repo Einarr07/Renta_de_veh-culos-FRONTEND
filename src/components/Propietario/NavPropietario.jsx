@@ -4,7 +4,7 @@ import logoImage from '../../assets/images/logo.png';
 
 const NavPropietario = () => {
     const location = useLocation();
-
+    
     const getLinkStyles = (path) => {
         const isSelected = location.pathname === path;
         return {
@@ -30,9 +30,9 @@ const NavPropietario = () => {
                 <img src={logoImage} alt="Logo" className="h-8 w-8" /> 
             </div>
             <div className="flex items-center space-x-4 ">
-                <Link to="/dashboard" style={getLinkStyles('/dashboard')}>Editar Catálogo</Link>
-                <Link to="/register/Vehiculo" style={getLinkStyles('/register/Vehiculo')}>Registrar un vehículo</Link>
-                <span className="text-gray-300">Nombre de Usuario</span>
+                <Link to="/edit-vehiculo" style={getLinkStyles('/edit-vehiculo')}>Editar Catálogo</Link>
+                <Link to="/register-vehiculo" style={getLinkStyles('/register-vehiculo')}>Registrar un vehículo</Link>
+                <span className="text-gray-300">Nombre Usuario</span>
                 <Link to="/logout" style={getLogoutStyles()}>Salir</Link>
             </div>
         </nav>

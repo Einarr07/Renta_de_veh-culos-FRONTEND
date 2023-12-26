@@ -1,12 +1,19 @@
-import {Navigate, Outlet} from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom';
 
-const Auth = () => {
-    const autenticado = localStorage.getItem('token')
-    return (
-        <main className="flex justify-center content-center w-full h-screen">
-            {!autenticado ? <Outlet /> : <Navigate to="/dashboard" />}
-        </main>
-    )
-}
+const Auth = ({ allowedRoles, children }) => {
+  const token = localStorage.getItem('token');
 
-export default Auth
+  if (!token) {
+    return <Navigate to="/unauthorized" />;
+  }
+
+  const userRole = localStorage.getItem('role'); // Asegúrate de tener el nombre correcto del campo donde almacenas el rol
+
+  if (!userRole || !allowedRoles.includes(userRole)) {
+    return <Navigate to="/unauthorized" />;
+  }
+
+  return <Outlet />;
+};
+
+export default Auth;

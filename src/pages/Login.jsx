@@ -16,7 +16,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [mensajeCliente, setMensajeCliente] = useState(null);
   const [mensajePropietario, setMensajePropietario] = useState(null);
-
+  // Define setAuth en el componente
+  const [auth, setAuth] = useState(null);
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -26,24 +27,55 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
-      console.log("Datos enviados al servidor: ", form);
       const url = `${import.meta.env.VITE_BACKEND_URL}/login`;
       const respuesta = await axios.post(url, form);
   
       if (respuesta && respuesta.data) {
         localStorage.setItem('token', respuesta.data.token);
+        localStorage.setItem('role', respuesta.data.role || '');
         setAuth(respuesta.data);
-        navigate('/aceptar-solicitudes');
+        console.log("Token almacenado en localStorage:", localStorage.getItem('token'));
+        console.log("Rol almacenado en localStorage:", localStorage.getItem('role'));
+  
+        // Aquí podrías redirigir a diferentes rutas según el rol del usuario
+        if (respuesta.data.role === 'propietario') {
+          navigate('/propietario/dashboard'); // Cambia la ruta según tu estructura de rutas
+        } else if (respuesta.data.role === 'admin') {
+          navigate('/admin/dashboard'); // Cambia la ruta según tu estructura de rutas
+        } else {
+          // Otro rol, redirige a una ruta predeterminada
+          navigate('/default-route'); // Cambia la ruta según tu estructura de rutas
+        }
       } else {
-        console.error('La respuesta o su propiedad "data" no están definidas correctamente.');
+        console.error('La respuesta o su propiedad "data" no están definidas correctamente:', respuesta);
+        // Manejo de errores cuando la respuesta o su propiedad "data" no están definidas correctamente
       }
     } catch (error) {
-      setMensaje({
-        respuesta: error.response?.data.msg || 'Error de servidor',
-        tipo: false,
-      });
-  
+      if (error.response) {
+        // Respuesta del servidor con detalles de error
+        console.error('Error en la respuesta del servidor:', error.response.data);
+        setMensaje({
+          respuesta: error.response?.data.msg || 'Cuenta o Contraseña invalidos',
+          tipo: false,
+        });
+      } else if (error.request) {
+        // La solicitud fue realizada, pero no se recibió respuesta
+        console.error('Error en la solicitud, no se recibió respuesta del servidor:', error.request);
+        setMensaje({
+          respuesta: error.response?.data.msg || 'El servidor no responde',
+          tipo: false,
+        });
+      } else {
+        // Error durante la configuración de la solicitud
+        console.error('Error durante la configuración de la solicitud:', error.message);
+        setMensaje({
+          respuesta: error.response?.data.msg || 'Error durante la solicuitud',
+          tipo: false,
+        });
+      }
+
       setForm({});
   
       setTimeout(() => {
@@ -51,6 +83,8 @@ const Login = () => {
       }, 3000);
     }
   };
+  
+  
   
 
   const handleRegisterClick = (role) => {
