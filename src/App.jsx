@@ -14,8 +14,8 @@ import Restore from './pages/Restore';
 import { NotFound } from './pages/NotFound';
 // Propietario
 import NavPropietario from './components/Propietario/NavPropietario';
-import { RegisterVehiculo } from './pages/RegisterVehiculo';
-import { EditVehiculo } from './pages/EditVehiculo';
+import  RegisterVehiculo  from './pages/RegisterVehiculo';
+import  EditVehiculo  from './pages/EditVehiculo';
 import { SolicitudesProvider } from './pages/SolicitudesContext';
 // Administrador
 import AceeptRequests from './pages/AceeptRequests';
@@ -35,15 +35,13 @@ function App() {
           <Route path='/confirmar/:token' element={<Confirm />} />
           <Route path='/reset-password/:token' element={<Restore />} />
 
+          <Route path='/register-vehiculo' element={<RegisterVehiculo/>}/>
           {/* Rutas protegidas por roles */}
           <Route
-            path='/propietario/*'
+            path='/propietario'
             element={
               <Auth allowedRoles={['propietario']}>
-                <NavPropietario>
-                  <Route index element={<RegisterVehiculo />} />
-                  <Route path='/edit-vehiculo' element={<EditVehiculo />} />
-                </NavPropietario>
+                <NavPropietario/>
               </Auth>
             }
           />

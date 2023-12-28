@@ -41,9 +41,9 @@ const Login = () => {
   
         // Aquí podrías redirigir a diferentes rutas según el rol del usuario
         if (respuesta.data.role === 'propietario') {
-          navigate('/propietario/dashboard'); // Cambia la ruta según tu estructura de rutas
+          navigate('/propietario'); // Cambia la ruta según tu estructura de rutas
         } else if (respuesta.data.role === 'admin') {
-          navigate('/admin/dashboard'); // Cambia la ruta según tu estructura de rutas
+          navigate('/admin'); // Cambia la ruta según tu estructura de rutas
         } else {
           // Otro rol, redirige a una ruta predeterminada
           navigate('/default-route'); // Cambia la ruta según tu estructura de rutas
