@@ -19,7 +19,9 @@ import  EditVehiculo  from './pages/EditVehiculo';
 import { SolicitudesProvider } from './pages/SolicitudesContext';
 // Administrador
 import AceeptRequests from './pages/AceeptRequests';
-
+// Cliente
+import ViewVehiculo from './pages/ViewVehiculo';
+import ViewHistorialPedidos from './pages/ViewHistorialPedidos';
 
 function App() {
   return (
@@ -36,24 +38,11 @@ function App() {
           <Route path='/reset-password/:token' element={<Restore />} />
 
           <Route path='/register-vehiculo' element={<RegisterVehiculo/>}/>
-          {/* Rutas protegidas por roles */}
-          <Route
-            path='/propietario'
-            element={
-              <Auth allowedRoles={['propietario']}>
-                <NavPropietario/>
-              </Auth>
-            }
-          />
-          <Route
-            path='/aceptar-solicitudes'
-            element={
-              <Auth allowedRoles={['admin']}>
-                <AceeptRequests />
-              </Auth>
-            }
-          />
+          
+          <Route path='/aceptar-solicitudes' element={<AceeptRequests/>}/>
+          <Route path='/historial-pedidos' element={<ViewHistorialPedidos />} />
 
+          <Route path='/vehiculos-en-alquiler' element={<ViewVehiculo/>} />
           {/* Página de no autorizado */}
           <Route path='/unauthorized' element={<UnAuthorized />} />
 
