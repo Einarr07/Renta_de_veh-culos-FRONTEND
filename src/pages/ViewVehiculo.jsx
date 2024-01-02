@@ -44,7 +44,6 @@ const ViewVehiculo = () => {
 
   return (
     <div className="text-center">
-      <NavCliente />
       <h2>Lista de Vehículos Disponibles</h2>
       {message ? (
         <p>{message}</p>

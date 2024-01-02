@@ -12,14 +12,17 @@ import UnAuthorized from './pages/unauthorized';
 import Confirm from './pages/Confirm';
 import Restore from './pages/Restore';
 import { NotFound } from './pages/NotFound';
+import {PrivateRoute} from './routes/PrivateRoute'
 // Propietario
 import NavPropietario from './components/Propietario/NavPropietario';
 import  RegisterVehiculo  from './pages/RegisterVehiculo';
 import  EditVehiculo  from './pages/EditVehiculo';
 import { SolicitudesProvider } from './pages/SolicitudesContext';
 // Administrador
+import NavAdministrador from './components/Administrador/NavAdministrador'
 import AceeptRequests from './pages/AceeptRequests';
 // Cliente
+import NavCliente from './components/Cliente/NavCliente';
 import ViewVehiculo from './pages/ViewVehiculo';
 import ViewHistorialPedidos from './pages/ViewHistorialPedidos';
 
@@ -37,12 +40,44 @@ function App() {
           <Route path='/confirmar/:token' element={<Confirm />} />
           <Route path='/reset-password/:token' element={<Restore />} />
 
-          <Route path='/register-vehiculo' element={<RegisterVehiculo/>}/>
-          
-          <Route path='/aceptar-solicitudes' element={<AceeptRequests/>}/>
-          <Route path='/historial-pedidos' element={<ViewHistorialPedidos />} />
+          <Route 
+            path='/propietario/*'
+            element={
+              <PrivateRoute>
+                <NavPropietario/>
+                <Routes>
+                  <Route path='edit-vehiculo' element={<EditVehiculo />} />
+                  <Route path='register-vehiculo' element={<RegisterVehiculo />} />
+                </Routes>
+              </PrivateRoute>
+            }
+          />
 
-          <Route path='/vehiculos-en-alquiler' element={<ViewVehiculo/>} />
+          <Route 
+            path='/admin/*'
+            element={
+              <PrivateRoute>
+                <NavAdministrador/>
+                <Routes>
+                  <Route path='aceptar-solicitudes' element={<AceeptRequests />} />
+                </Routes>
+              </PrivateRoute>
+            }
+          />
+
+          <Route 
+            path='/cliente/*'
+            element={
+              <PrivateRoute>
+                <NavCliente/>
+                <Routes>
+                  <Route path='historial-pedidos' element={<ViewHistorialPedidos />} />
+                  <Route path='vehiculos-en-alquiler' element={<ViewVehiculo />} />
+                </Routes>
+              </PrivateRoute>
+            }
+          />
+
           {/* Página de no autorizado */}
           <Route path='/unauthorized' element={<UnAuthorized />} />
 

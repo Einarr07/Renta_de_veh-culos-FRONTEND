@@ -30,9 +30,9 @@ const NavPropietario = () => {
                 <img src={logoImage} alt="Logo" className="h-8 w-8" /> 
             </div>
             <div className="flex items-center space-x-4">
-                <Link to="/aceptar-solicitudes" style={getLinkStyles('/aceptar-solicitudes')}>Aceptar Solicitudes</Link>
-                <Link to="/perfil" style={getLinkStyles('/perfil')}>Nombre del Usuario</Link>
-                <Link to="/logout" style={getLogoutStyles()}>Salir</Link>
+                <Link to="/admin/aceptar-solicitudes" style={getLinkStyles('/admin/aceptar-solicitudes')}>Aceptar Solicitudes</Link>
+                <Link to="/admin/perfil" style={getLinkStyles('/admin/perfil')}>Nombre del Usuario</Link>
+                <Link to="/admin/logout" style={getLogoutStyles()}>Salir</Link>
             </div>
         </nav>
     );

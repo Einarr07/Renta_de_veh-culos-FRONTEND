@@ -83,7 +83,7 @@ export const RegisterPropietario = () => {
             // Agregar el campo "role" al objeto form
             const formWithRole = {
                 ...form,
-                role: "propietario", // Puedes ajustar este valor según tus necesidades
+                role_id: 2, // Puedes ajustar este valor según tus necesidades
             };
     
             const respuesta = await axios.post(url, formWithRole);

@@ -33,11 +33,11 @@ const NavCliente = () => {
                 <img src={logoImage} alt="Logo" className="h-8 w-8" />
             </div>
             <div className="flex items-center space-x-4 ">
-                <Link to="/historial-pedidos" style={getLinkStyles('/historial-pedidos')}>Historial de Pedidos</Link>
-                <Link to="/vehiculos-en-alquiler" style={getLinkStyles('/vehiculos-en-alquiler')}>Vehículos en Alquiler</Link>
+                <Link to="/cliente/historial-pedidos" style={getLinkStyles('/cliente/historial-pedidos')}>Historial de Pedidos</Link>
+                <Link to="/cliente/vehiculos-en-alquiler" style={getLinkStyles('/cliente/vehiculos-en-alquiler')}>Vehículos en Alquiler</Link>
                 {/*<span className="text-gray-300">{auth && auth.nombre}</span>*/}
-                <Link to="/perfil" style={getLinkStyles('/perfil')}>Nombre del Usuario</Link>
-                <Link to="/logout" style={getLogoutStyles()}>Salir</Link>
+                <Link to="/cliente/perfil" style={getLinkStyles('/perfil')}>Nombre del Usuario</Link>
+                <Link to="/cliente/logout" style={getLogoutStyles()}>Salir</Link>
             </div>
         </nav>
     );

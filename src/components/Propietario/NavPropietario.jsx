@@ -33,11 +33,11 @@ const NavPropietario = () => {
                 <img src={logoImage} alt="Logo" className="h-8 w-8" />
             </div>
             <div className="flex items-center space-x-4 ">
-                <Link to="/edit-vehiculo" style={getLinkStyles('/edit-vehiculo')}>Editar Catálogo</Link>
-                <Link to="/register-vehiculo" style={getLinkStyles('/register-vehiculo')}>Registrar un vehículo</Link>
-                {/*<span className="text-gray-300">{auth && auth.nombre}</span>*/}
-                <Link to="/perfil" style={getLinkStyles('/perfil')}>Nombre del Usuario</Link>
-                <Link to="/logout" style={getLogoutStyles()}>Salir</Link>
+                {/*<Link to="/propietario/edit-vehiculo" style={getLinkStyles('/propietario/edit-vehiculo')}>Editar Catálogo</Link>*/}
+                <Link to="/propietario/register-vehiculo" style={getLinkStyles('/propietario/register-vehiculo')}>Registrar un vehículo</Link>
+                {/* <span className="text-gray-300">{auth && auth.nombre}</span> */}
+                <Link to="/propietario/perfil" style={getLinkStyles('/propietario/perfil')}>Nombre del Usuario</Link>
+                <Link to="/propietario/logout" style={getLogoutStyles()}>Salir</Link>
             </div>
         </nav>
     );

@@ -6,10 +6,10 @@ import NavAdministrador from '../components/Administrador/NavAdministrador.jsx';
 const AceeptRequests = () => {
   const { state, actualizarSolicitudes } = useSolicitudes();
 
-  const handleAccept = async (solicitudId) => {
+  const handleAccept = async (Id) => {
     try {
       // Realiza la lógica para aceptar la solicitud en el backend
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/aceptar-solicitud/${solicitudId}`);
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/estado/${Id}`);
 
       // Actualiza el estado local después de aceptar la solicitud
       actualizarSolicitudes();
@@ -32,7 +32,6 @@ const AceeptRequests = () => {
 
   return (
     <>
-      <NavAdministrador />
       <div className="container mx-auto mt-5">
         <h2 className="text-center mb-4 text-4xl font-bold">Solicitudes Pendientes</h2>
         <div className="flex flex-wrap -mx-4">

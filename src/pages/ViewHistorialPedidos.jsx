@@ -23,7 +23,6 @@ const ViewHistorialPedidos = () => {
 
   return (
     <div className="text-center">
-      <NavCliente />
       <h2>Historial de Pedidos</h2>
       <ul>
         {historialPedidos.map((pedido) => (

@@ -35,7 +35,7 @@ export const EditVehiculo = () => {
 
   return (
     <>
-      <NavPropietario />
+      
       <div className="container mx-auto mt-5">
         <h2 className="text-center mb-4 text-4xl font-bold">Editar Vehículo</h2>
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
