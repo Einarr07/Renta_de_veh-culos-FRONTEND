@@ -7,7 +7,7 @@ const Auth = ({ allowedRoles, children }) => {
     return <Navigate to="/unauthorized" />;
   }
 
-  const userRole = localStorage.getItem('role'); // Asegúrate de tener el nombre correcto del campo donde almacenas el rol
+  const userRole = localStorage.getItem('role'); 
 
   if (!userRole || !allowedRoles.includes(userRole)) {
     return <Navigate to="/unauthorized" />;

@@ -170,7 +170,7 @@ const RegisterVehiculo = () => {
               onChange={handleImageChange}
               className="mt-1 p-2 w-full border rounded-md"
               accept="image/*"
-              maxfilesize={2097152}  // 2 MB en bytes
+              maxfilesize={2048 * 1024 * 1024}  // 2 MB en bytes
             />
           </div>
   

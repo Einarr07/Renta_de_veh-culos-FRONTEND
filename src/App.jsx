@@ -1,7 +1,6 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Auth from './layout/Auth';
 // General
 import { LandingPage } from './pages/LandiPage';
 import Login from './pages/Login';

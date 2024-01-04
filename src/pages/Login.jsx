@@ -46,7 +46,7 @@ const Login = () => {
           navigate('/admin'); // Cambia la ruta según tu estructura de rutas
         } else {
           // Otro rol, redirige a una ruta predeterminada
-          navigate('/default-route'); // Cambia la ruta según tu estructura de rutas
+          navigate('/cliente'); // Cambia la ruta según tu estructura de rutas
         }
       } else {
         console.error('La respuesta o su propiedad "data" no están definidas correctamente:', respuesta);

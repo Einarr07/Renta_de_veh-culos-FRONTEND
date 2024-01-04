@@ -1,52 +1,21 @@
-import React, { createContext, useContext, useReducer } from 'react';
+// SolicitudesContext.js
+
+import React, { createContext, useContext, useReducer, useState } from 'react';
 
 const SolicitudesContext = createContext();
 
 const initialState = {
-  solicitudes: [
-    {
-      id: 1,
-      propietario: 'Propietario 1',
-      marca: 'Toyota',
-      costoPorDia: 50,
-      // ... otras propiedades
-    },
-    {
-      id: 2,
-      propietario: 'Propietario 2',
-      marca: 'Honda',
-      costoPorDia: 40,
-      // ... otras propiedades
-    },
-    {
-      id: 3,
-      propietario: 'Propietario 3',
-      marca: 'Lambo',
-      costoPorDia: 50,
-      // ... otras propiedades
-    },
-    {
-      id: 4,
-      propietario: 'Propietario 4',
-      marca: 'Todo terreno',
-      costoPorDia: 40,
-      // ... otras propiedades
-    },
-    {
-      id: 5,
-      propietario: 'Propietario 5',
-      marca: 'Chevrolet',
-      costoPorDia: 40,
-      // ... otras propiedades
-    },
-  ],
+  solicitudes: [],
   // ... otros estados relacionados con las solicitudes
 };
 
 const solicitudesReducer = (state, action) => {
-  // Lógica del reducer para manejar acciones (aceptar, rechazar, etc.)
   switch (action.type) {
-    // ... casos de acciones
+    case 'ACTUALIZAR_SOLICITUDES':
+      return { ...state, solicitudes: action.payload };
+    case 'GUARDAR_RESPUESTA_BACKEND':
+      return { ...state, respuestaBackend: action.payload };
+    // ... otros casos de acciones
     default:
       return state;
   }
@@ -56,8 +25,16 @@ const solicitudesReducer = (state, action) => {
 const SolicitudesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(solicitudesReducer, initialState);
 
+  const actualizarSolicitudes = (solicitudes) => {
+    dispatch({ type: 'ACTUALIZAR_SOLICITUDES', payload: solicitudes });
+  };
+
+  const guardarRespuestaBackend = (respuesta) => {
+    dispatch({ type: 'GUARDAR_RESPUESTA_BACKEND', payload: respuesta });
+  };
+
   return (
-    <SolicitudesContext.Provider value={{ state, dispatch }}>
+    <SolicitudesContext.Provider value={{ state, actualizarSolicitudes, guardarRespuestaBackend }}>
       {children}
     </SolicitudesContext.Provider>
   );
