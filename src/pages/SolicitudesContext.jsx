@@ -6,7 +6,7 @@ const SolicitudesContext = createContext();
 
 const initialState = {
   solicitudes: [],
-  // ... otros estados relacionados con las solicitudes
+  
 };
 
 const solicitudesReducer = (state, action) => {
@@ -15,7 +15,7 @@ const solicitudesReducer = (state, action) => {
       return { ...state, solicitudes: action.payload };
     case 'GUARDAR_RESPUESTA_BACKEND':
       return { ...state, respuestaBackend: action.payload };
-    // ... otros casos de acciones
+    
     default:
       return state;
   }
