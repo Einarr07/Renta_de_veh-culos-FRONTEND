@@ -42,12 +42,13 @@ const Restore = () => {
       };
       const respuesta = await axios.post(url, data);
       setMensaje({ 
-        respuesta: respuesta.data.msg || 'Contraseña cambiada correctamente',
-        tipo: true });
+        respuesta: respuesta.data.message || 'Contraseña cambiada correctamente',
+        tipo: true,
+      });
     } catch (error) {
       setMensaje({ 
-        respuesta: error.response?.data.msg || 'Algo salió mal', 
-        tipo: false 
+        respuesta: error.response?.data.message || 'Algo salió mal', 
+        tipo: false,
       });
     }
   };

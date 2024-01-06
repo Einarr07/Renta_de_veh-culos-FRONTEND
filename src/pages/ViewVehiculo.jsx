@@ -19,7 +19,7 @@ const ViewVehiculo = () => {
         const token = localStorage.getItem('token');
         console.log('Token:', token);
 
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/solicitudes/aceptados`, {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/aceptados`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -151,7 +151,6 @@ const ViewVehiculo = () => {
               <p className="modal-detail">Placas: {selectedVehiculo.placas}</p>
               <p className="modal-detail">Descripción: {selectedVehiculo.descripcion}</p>
               <p className="modal-detail">Contacto: {selectedVehiculo.contacto}</p>
-              <p className="modal-detail">Contrato ID: {selectedVehiculo.contrato_id}</p>
               <img src={selectedVehiculo.image_url} alt="Imagen del vehículo" className="modal-image" />
             </>
           </div>
