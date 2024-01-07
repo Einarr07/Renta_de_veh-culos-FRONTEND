@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import { Forgot } from './pages/Forgot';
 import { RegisterCliente } from './components/Cliente/RegisterCliente';
 import { RegisterPropietario } from './components/Propietario/RegisterPropietario';
-import UnAuthorized from './pages/unauthorized';
+import UnAuthorized from './pages/UnAuthorized';
 import Confirm from './pages/Confirm';
 import Restore from './pages/Restore';
 import { NotFound } from './pages/NotFound';
