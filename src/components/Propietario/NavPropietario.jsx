@@ -99,7 +99,7 @@ const NavPropietario = () => {
             </div>
             <div className="flex items-center space-x-4 ">
                 <Link to="/propietario/register-vehiculo" style={getLinkStyles('/propietario/register-vehiculo')}>Registrar un vehículo</Link>
-                <Link to="/propietario/perfil" style={getLinkStyles('/propietario/perfil')}>{nombreUsuario}</Link>
+                <div to="/propietario/perfil" style={getLinkStyles('/propietario/perfil')}>{nombreUsuario}</div>
 
                 {/* Enlace para abrir la confirmación */}
                 <button onClick={handleLogout} style={getLogoutStyles()}>Salir</button>

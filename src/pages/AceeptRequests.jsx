@@ -142,7 +142,6 @@ const AceeptRequests = () => {
               <p className="modal-detail">Placas: {selectedVehiculo.placas}</p>
               <p className="modal-detail">Descripción: {selectedVehiculo.descripcion}</p>
               <p className="modal-detail">Contacto: {selectedVehiculo.contacto}</p>
-              <p className="modal-detail">Contrato ID: {selectedVehiculo.contrato_id}</p>
               <img src={selectedVehiculo.image_url} alt="Imagen del vehículo" className="modal-image" />
             </>
           </div>

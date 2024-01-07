@@ -101,7 +101,7 @@ const NavCliente = () => {
             <div className="flex items-center space-x-4 ">
                 <Link to="/cliente/historial-pedidos" style={getLinkStyles('/cliente/historial-pedidos')}>Historial de Pedidos</Link>
                 <Link to="/cliente/vehiculos-en-alquiler" style={getLinkStyles('/cliente/vehiculos-en-alquiler')}>Vehículos en Alquiler</Link>
-                <Link to="/cliente/perfil" style={getLinkStyles('/cliente/perfil')}>{nombreUsuario}</Link>
+                <div to="/cliente/perfil" style={getLinkStyles('/cliente/perfil')}>{nombreUsuario}</div>
                 {/* Enlace para abrir la confirmación */}
                 <button onClick={handleLogout} style={getLogoutStyles()}>Salir</button>
 

@@ -5,6 +5,8 @@ import { useSolicitudes } from './SolicitudesContext';
 
 const RegisterVehiculo = () => {
   const { agregarSolicitud } = useSolicitudes();
+  const [successMessage, setSuccessMessage] = useState('');
+  const [hideSuccessMessage, setHideSuccessMessage] = useState(true);
   const [vehiculoData, setVehiculoData] = useState({
     tipo_vehiculo: "",
     marca: "",
@@ -15,12 +17,66 @@ const RegisterVehiculo = () => {
     contacto: "",
     descripcion: ""
   });
-  const [mensaje, setMensaje] = useState({})
+  const [mensaje, setMensaje] = useState({});
+  const [descripcion, setDescripcion] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     const newValue = typeof value === 'number' ? String(value) : value;
-    setVehiculoData((prevData) => ({ ...prevData, [name]: newValue }));
+  
+    switch (name) {
+      case "tipo_vehiculo":
+      case "marca":
+      case "placas":
+        setVehiculoData((prevData) => {
+          return { ...prevData, [name]: newValue };
+        });
+        break;
+  
+      case "numero_pasajero":
+        const parsedValue = parseInt(newValue, 10) || 0;
+        if (parsedValue >= 1 && parsedValue <= 20) {
+          setVehiculoData((prevData) => {
+            return { ...prevData, [name]: parsedValue };
+          });
+        }
+        break;
+  
+      case "image_url":
+        // Realizar verificación específica para el campo image_url si es necesario
+        break;
+  
+      case "costo_alquiler":
+        const parsedCostoAlquiler = parseFloat(newValue) || 1;
+        if (parsedCostoAlquiler >= 0) {
+          setVehiculoData((prevData) => {
+            return { ...prevData, [name]: parsedCostoAlquiler };
+          });
+        }
+        break;
+  
+      case "contacto":
+        const maxLengthContacto = 10;
+        if (newValue.length <= maxLengthContacto) {
+          setVehiculoData((prevData) => {
+            return { ...prevData, [name]: newValue };
+          });
+        }
+        break;
+  
+      case "descripcion":
+        const maxLengthDescripcion = 500;
+        if (newValue.length <= maxLengthDescripcion) {
+          setVehiculoData((prevData) => {
+            return { ...prevData, [name]: newValue };
+          });
+          setDescripcion(newValue.length);
+        }
+        break;
+  
+      default:
+        break;
+    }
   };
   
   const handleImageChange = (e) => {
@@ -70,10 +126,13 @@ const RegisterVehiculo = () => {
 
       console.log("Respuesta del servidor:", respuesta.data);
 
-      setMensaje({
-        respuesta: respuesta.data.msg || "Tu solicitud fue enviada correctamente",
-        tipo: true,
-      });
+      setSuccessMessage('¡Su vehículo fue registrado exitosamente!');
+      setHideSuccessMessage(false);
+
+      setTimeout(() => {
+        setHideSuccessMessage(true);
+      }, 3000);
+
     } catch (error) {
       console.error("Error en la solicitud:", error);
       if (error.response) {
@@ -108,30 +167,65 @@ const RegisterVehiculo = () => {
             <label htmlFor="tipo_vehiculo" className="block text-sm font-medium text-gray-600">
               Tipo de vehículo
             </label>
-            <input
-              type="text"
+            <select
               id="tipo_vehiculo"
               name="tipo_vehiculo"
               value={vehiculoData.tipo_vehiculo}
               onChange={handleChange}
               className="mt-1 p-2 w-full border rounded-md"
-            />
+            >
+              <option value="">Selecciona el tipo de vehículo</option>
+              <option value="Motocicleta">Motocicleta</option>
+              <option value="Auto">Auto</option>
+              <option value="Camioneta">Camioneta</option>
+              <option value="Camión">Camión</option>
+              <option value="Bus">Bus</option>
+              <option value="Bicicleta">Bicicleta</option>
+              <option value="Scooter">Scooter</option>
+              <option value="Cuatrimoto">Cuatrimoto</option>
+              <option value="Tractor">Tractor</option>
+              <option value="Furgoneta">Furgoneta</option>
+            </select>
           </div>
   
           <div className="mb-4">
             <label htmlFor="marca" className="block text-sm font-medium text-gray-600">
               Marca
             </label>
-            <input
-              type="text"
+            <select
               id="marca"
               name="marca"
               value={vehiculoData.marca}
               onChange={handleChange}
               className="mt-1 p-2 w-full border rounded-md"
-            />
+            >
+              <option value="">Selecciona la marca del vehículo</option>
+              <option value="Chevrolet">Chevrolet</option>
+              <option value="Ford">Ford</option>
+              <option value="Toyota">Toyota</option>
+              <option value="Nissan">Nissan</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="Kia">Kia</option>
+              <option value="Mazda">Mazda</option>
+              <option value="Volkswagen">Volkswagen</option>
+              <option value="Honda">Honda</option>
+              <option value="Renault">Renault</option>
+              <option value="Subaru">Subaru</option>
+              <option value="Mercedes-Benz">Mercedes-Benz</option>
+              <option value="Mitsubishi">Mitsubishi</option>
+              <option value="Jeep">Jeep</option>
+              <option value="Suzuki">Suzuki</option>
+            </select>
           </div>
   
+          {successMessage && !hideSuccessMessage && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <p style={{ color: 'green', textAlign: 'center' }}>{successMessage}</p>
+          </div>
+        </div>
+      )}
+
           <div className="mb-4">
             <label htmlFor="placas" className="block text-sm font-medium text-gray-600">
               Placas del vehículo
@@ -150,14 +244,19 @@ const RegisterVehiculo = () => {
             <label htmlFor="numero_pasajero" className="block text-sm font-medium text-gray-600">
               Número máximo de pasajeros
             </label>
-            <input
-              type="number"
+            <select
               id="numero_pasajero"
               name="numero_pasajero"
               value={vehiculoData.numero_pasajero}
               onChange={handleChange}
               className="mt-1 p-2 w-full border rounded-md"
-            />
+            >
+              {[...Array(20).keys()].map((number) => (
+                <option key={number + 1} value={number + 1}>
+                  {number + 1}
+                </option>
+              ))}
+            </select>
           </div>
   
           <div className="mb-4">
@@ -190,7 +289,7 @@ const RegisterVehiculo = () => {
   
           <div className="mb-4">
             <label htmlFor="contacto" className="block text-sm font-medium text-gray-600">
-              Número de contacto
+              Número de contacto ({vehiculoData.contacto.length}/10)
             </label>
             <input
               type="text"
@@ -204,7 +303,7 @@ const RegisterVehiculo = () => {
   
           <div className="mb-4">
             <label htmlFor="descripcion" className="block text-sm font-medium text-gray-600">
-              Descripciones generales
+              Descripciones generales ({vehiculoData.descripcion.length}/500)
             </label>
             <textarea
               id="descripcion"

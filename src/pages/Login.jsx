@@ -105,17 +105,15 @@ const Login = () => {
 
         <div className="w-full md:w-1/2 bg-white flex flex-col md:flex-row justify-center items-center">
           <div className="md:w-4/5">
-            {Object.keys(mensaje).length > 0 && (
-              <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>
-            )}
-
             <h1 className="text-3xl font-semibold mb-2 text-center uppercase text-gray-500">
               Bienvenido
             </h1>
             <small className="text-gray-400 block my-4 text-sm">
               Por favor ingresa tus datos
             </small>
-
+            {Object.keys(mensaje).length > 0 && (
+              <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>
+            )}
             <form onSubmit={handleSubmit} className="w-full max-w-md">
               <div className="mb-3">
                 <label className="mb-2 block text-sm font-semibold">Correo electrónico</label>
