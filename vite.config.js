@@ -8,5 +8,4 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
-  base: "/Renta_de_vehiculos-FRONTEND/"
 })
