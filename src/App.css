@@ -685,10 +685,76 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+/*Navegación */
+/* Estilo para el modal de confirmación */
+.confirmation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff; /* Ajusta el color de fondo según tus preferencias */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  width: 300px;
+  z-index: 1000; /* Asegura que el modal esté en la parte superior */
+}
+
+/* Estilo para el botón dentro del modal de confirmación */
+.confirmation-modal button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid #3490dc;
+}
+
+/* Estilo para cubrir la pantalla con un overlay */
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Asegura que el overlay esté detrás del modal pero por encima del contenido */
+}
+
+/* Add this style to center the text in the modal */
+.confirmation-modal p {
+  text-align: center;
+  color: black;
+}
+
 .container {
   width: 100%;
 }
 
+.mt-auto{
+  background-color: #3889B7;
+}
+
+/* Cambios celulares */
+@media (max-width: 640px) {
+  .hidden {
+    display: none;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+}
+
+/* Tailwind CSS Utilities para anchos de contenedor responsivos */
 @media (min-width: 640px) {
   .container {
     max-width: 640px;

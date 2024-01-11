@@ -94,7 +94,7 @@ const NavPropietario = () => {
 
     return (
         <nav style={{ backgroundColor: '#3889B7' }} className="flex items-center justify-between p-5 bg-gray-800 text-white">
-            <div className="flex items-center space-x-4">
+            <div className="logo m-4 flex items-center space-x-4">
                 <img src={logoImage} alt="Logo" className="h-8 w-8" />
             </div>
             <div className="flex items-center space-x-4 ">
@@ -106,12 +106,15 @@ const NavPropietario = () => {
 
                 {/* Modal de confirmación */}
                 {showConfirmation && (
-                    <div className="confirmation-modal">
-                        <p>¿Estás seguro de que deseas cerrar la sesión?</p>
-                        <button onClick={confirmLogout}>Sí</button>
-                        <button onClick={cancelLogout}>No</button>
+                    <div className="confirmation-overlay">
+                        <div className="confirmation-modal">
+                            <p>¿Estás seguro de que deseas cerrar la sesión?</p>
+                            <button onClick={confirmLogout}>Sí</button>
+                            <button onClick={cancelLogout}>No</button>
+                        </div>
                     </div>
                 )}
+
             </div>
         </nav>
     );

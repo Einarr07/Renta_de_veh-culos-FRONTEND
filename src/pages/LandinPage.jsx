@@ -36,7 +36,7 @@ export const LandingPage = () => {
       <div className="main-layout">
         <header className="bg-gray-800 text-white">
   <div className="container mx-auto flex items-center justify-between p-4">
-    <div className="logo">
+    <div className="logo m-4">
       <Link to="/">
         <img src={logoImage} alt="logo de la empresa" className="w-16" />
       </Link>
@@ -260,3 +260,4 @@ export const LandingPage = () => {
       </div>
   );
 };
+export default LandingPage;

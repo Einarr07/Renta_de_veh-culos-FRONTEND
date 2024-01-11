@@ -16,8 +16,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [mensajeCliente, setMensajeCliente] = useState(null);
   const [mensajePropietario, setMensajePropietario] = useState(null);
-  // Define setAuth en el componente
   const [auth, setAuth] = useState(null);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -27,65 +27,30 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const url = `${import.meta.env.VITE_BACKEND_URL}/login`;
       const respuesta = await axios.post(url, form);
-  
+
       if (respuesta && respuesta.data) {
         localStorage.setItem('token', respuesta.data.token);
         localStorage.setItem('role', respuesta.data.role || '');
         setAuth(respuesta.data);
-        console.log("Token almacenado en localStorage:", localStorage.getItem('token'));
-        console.log("Rol almacenado en localStorage:", localStorage.getItem('role'));
-  
-        // Aquí podrías redirigir a diferentes rutas según el rol del usuario
+
         if (respuesta.data.role === 'propietario') {
-          navigate('/propietario'); // Cambia la ruta según tu estructura de rutas
+          navigate('/propietario');
         } else if (respuesta.data.role === 'admin') {
-          navigate('/admin'); // Cambia la ruta según tu estructura de rutas
+          navigate('/admin');
         } else {
-          // Otro rol, redirige a una ruta predeterminada
-          navigate('/cliente'); // Cambia la ruta según tu estructura de rutas
+          navigate('/cliente');
         }
       } else {
         console.error('La respuesta o su propiedad "data" no están definidas correctamente:', respuesta);
-        // Manejo de errores cuando la respuesta o su propiedad "data" no están definidas correctamente
       }
     } catch (error) {
-      if (error.response) {
-        // Respuesta del servidor con detalles de error
-        console.error('Error en la respuesta del servidor:', error.response.data);
-        setMensaje({
-          respuesta: error.response?.data.msg || 'Cuenta o Contraseña invalidos',
-          tipo: false,
-        });
-      } else if (error.request) {
-        // La solicitud fue realizada, pero no se recibió respuesta
-        console.error('Error en la solicitud, no se recibió respuesta del servidor:', error.request);
-        setMensaje({
-          respuesta: error.response?.data.msg || 'El servidor no responde',
-          tipo: false,
-        });
-      } else {
-        // Error durante la configuración de la solicitud
-        console.error('Error durante la configuración de la solicitud:', error.message);
-        setMensaje({
-          respuesta: error.response?.data.msg || 'Error durante la solicuitud',
-          tipo: false,
-        });
-      }
-
-      setForm({});
-  
-      setTimeout(() => {
-        setMensaje({});
-      }, 3000);
+      // Manejo de errores
     }
   };
-  
-  
-  
 
   const handleRegisterClick = (role) => {
     setSelectedRole(role);
@@ -97,13 +62,13 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex font-serif h-screen">
+      <div className="flex flex-col md:flex-row h-screen">
         <div
-          className={`hidden sm:block w-full md:w-1/2 h-screen bg-cover bg-center bg-no-repeat`}
+          className={`w-full md:w-1/2 h-1/3 md:h-screen bg-cover bg-center bg-no-repeat`}
           style={{ backgroundImage: `url(${autoLoginImage})` }}
         ></div>
 
-        <div className="w-full md:w-1/2 bg-white flex flex-col md:flex-row justify-center items-center">
+        <div className="w-full md:w-1/2 bg-white flex flex-col justify-center items-center">
           <div className="md:w-4/5">
             <h1 className="text-3xl font-semibold mb-2 text-center uppercase text-gray-500">
               Bienvenido
@@ -147,7 +112,7 @@ const Login = () => {
               </div>
 
               <div className="my-4">
-              <button className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">
+                <button className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">
                   Iniciar sesión
                 </button>
               </div>
@@ -181,7 +146,6 @@ const Login = () => {
                 Crear una cuenta (Cliente)
               </button>
               
-              
               <button
                 className="block w-full py-2 px-5 bg-gray-600 text-slate-300 border rounded-xl hover:scale-110 duration-300 hover:bg-gray-900 hover:text-white"
                 onClick={() => {
@@ -192,31 +156,30 @@ const Login = () => {
               >
                 Crear una cuenta (Propietario)
               </button>
-              
             </div>
-      {/* Modal de registro */}
-      {selectedRole && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-md">
-            <p className="text-xl font-semibold mb-4">Selecciona tipo de cuenta</p>
-            <div className="flex justify-between">
-              {/* Puedes ajustar los enlaces según tus rutas */}
-              <Link
-                to={`/register/${selectedRole}`}
-                className="py-2 px-5 bg-gray-600 text-slate-300 border rounded-xl hover:scale-110 duration-300 hover:bg-gray-900 hover:text-white mr-4"
-              >
-                Continuar como {selectedRole}
-              </Link>
-              <button
-                className="py-2 px-5 bg-gray-600 text-slate-300 border rounded-xl hover:scale-110 duration-300 hover:bg-gray-900 hover:text-white"
-                onClick={closeModal}
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
+            {selectedRole && (
+              <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="bg-white p-8 rounded-md">
+                  <p className="text-xl font-semibold mb-4">Selecciona tipo de cuenta</p>
+                  <div className="flex justify-between">
+                    <Link
+                      to={`/register/${selectedRole}`}
+                      className="py-2 px-5 bg-gray-600 text-slate-300 border rounded-xl hover:scale-110 duration-300 hover:bg-gray-900 hover:text-white mr-4"
+                    >
+                      Continuar como {selectedRole}
+                    </Link>
+                    <button
+                      className="py-2 px-5 bg-gray-600 text-slate-300 border rounded-xl hover:scale-110 duration-300 hover:bg-gray-900 hover:text-white"
+                      onClick={closeModal}
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="mt-3 text-sm">
               <Link
                 to="/"

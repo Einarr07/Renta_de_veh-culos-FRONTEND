@@ -55,14 +55,16 @@ const RegisterVehiculo = () => {
         }
         break;
   
-      case "contacto":
-        const maxLengthContacto = 10;
-        if (newValue.length <= maxLengthContacto) {
-          setVehiculoData((prevData) => {
-            return { ...prevData, [name]: newValue };
-          });
-        }
-        break;
+        case "contacto":
+          // Usar una expresión regular para permitir solo números
+          const numericValue = value.replace(/\D/g, '');
+          const maxLengthContacto = 10;
+          if (numericValue.length <= maxLengthContacto) {
+            setVehiculoData((prevData) => {
+              return { ...prevData, [name]: numericValue };
+            });
+          }
+          break;
   
       case "descripcion":
         const maxLengthDescripcion = 500;

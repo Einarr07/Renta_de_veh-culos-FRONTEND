@@ -6,7 +6,7 @@ const SolicitudesContext = createContext();
 
 const initialState = {
   solicitudes: [],
-  
+  respuestaBackend: null,
 };
 
 const solicitudesReducer = (state, action) => {
