@@ -8,7 +8,6 @@ import { Forgot } from './pages/Forgot';
 import { RegisterCliente } from './components/Cliente/RegisterCliente';
 import { RegisterPropietario } from './components/Propietario/RegisterPropietario';
 import UnAuthorized from './pages/UnAuthorized';
-import Confirm from './pages/Confirm';
 import Restore from './pages/Restore';
 import { NotFound } from './pages/NotFound';
 import {PrivateRoute} from './routes/PrivateRoute'
@@ -36,7 +35,6 @@ function App() {
           <Route path='/forgot/:id' element={<Forgot />} />
           <Route path='/register/Cliente' element={<RegisterCliente />} />
           <Route path='/register/Propietario' element={<RegisterPropietario />} />
-          <Route path='/confirmar/:token' element={<Confirm />} />
           <Route path='/reset-password/:token' element={<Restore />} />
 
           <Route 

@@ -18,18 +18,32 @@ const Restore = () => {
     try {
       const url = `${import.meta.env.VITE_BACKEND_URL}/reset-password/${token}`;
       const respuesta = await axios.get(url);
+  
+      if (respuesta.data && respuesta.data.msg) {
+        setMensaje({
+          respuesta: `Token confirmado: ${respuesta.data.msg}`,
+          tipo: true,
+        });
+      } else {
+        setMensaje({
+          respuesta: 'Token confirmado, ingresa los datos para continuar',
+          tipo: true,
+        });
+      }
       setTokenBack(true);
-      setMensaje({
-        respuesta: respuesta.data.msg || "Token confirmado, ingresa los datos para continuar",
-        tipo: true,
-      });
     } catch (error) {
+      let errorMsg = 'Algo salió mal, no se puede verificar el token';
+  
+      if (error.response && error.response.data && error.response.data.msg) {
+        errorMsg = error.response.data.msg;
+      }
+  
       setMensaje({
-        respuesta: error.response?.data.msg || "Algo salió mal, no se puede verificar el token",
+        respuesta: errorMsg,
         tipo: false,
       });
     }
-  };
+  };  
 
   const handleResetPassword = async () => {
     try {
