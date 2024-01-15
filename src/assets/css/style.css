@@ -339,7 +339,7 @@ button {
 /** banner section **/
 
 .banner_main {
-     background: url(../images/banner.jpg);
+     background: url(../images/banner.jpeg);
      background-repeat: no-repeat;
      min-height: 700px;
      display: flex;
@@ -382,7 +382,8 @@ button {
 }
 
 .text-bg p {
-     color: #fff;
+     margin-top: 70px;
+     color: #f3f3f3;
      font-size: 17px;
      line-height: 28px;
      padding-bottom: 60px;
@@ -945,6 +946,7 @@ button {
           font-size: 26px;
           line-height: 36px;
      }
+     
      .our {
           margin: 0;
      }

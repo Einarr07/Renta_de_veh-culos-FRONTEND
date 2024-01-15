@@ -183,7 +183,7 @@ export const RegisterPropietario = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="mb-2 block text-sm font-semibold" htmlFor="password">Contraseña ({passwordLength}/20):</label>
+                            <label className="mb-2 block text-sm font-semibold" htmlFor="password">Contraseña ({passwordLength}/20): (Minimo 6 caracteres)</label>
                             <input type="password" id="password" name='password'
                                 value={form.password || ""} onChange={handleChange}
                                 placeholder="********************" className="block w-full rounded-md border border-gray-300 focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500" required />
