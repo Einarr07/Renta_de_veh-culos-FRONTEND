@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // General
-import { LandingPage } from './pages/LandinPage';
+import  LandingPage  from './pages/LandinPage';
 import Login from './pages/Login';
 import { Forgot } from './pages/Forgot';
 import { RegisterCliente } from './components/Cliente/RegisterCliente';
