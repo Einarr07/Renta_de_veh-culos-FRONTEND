@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useState } from "react";
-import Mensaje from '../components/Alertas/Mensaje';
-import { useSolicitudes } from './SolicitudesContext';
+import Mensaje from '../Alertas/Mensaje';
+import { useSolicitudes } from '../../pages/SolicitudesContext';
 
 const RegisterVehiculo = () => {
-  const { agregarSolicitud } = useSolicitudes();
   const [successMessage, setSuccessMessage] = useState('');
   const [hideSuccessMessage, setHideSuccessMessage] = useState(true);
   const [vehiculoData, setVehiculoData] = useState({

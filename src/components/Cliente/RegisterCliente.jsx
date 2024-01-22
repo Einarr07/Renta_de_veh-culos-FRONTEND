@@ -3,8 +3,9 @@ import { useState } from 'react';
 import Mensaje from '../Alertas/Mensaje';
 import axios from 'axios';
 import vehiculosCliente from "../../assets/images/vehiculosCliente.jpg";
+
 export const RegisterCliente = () => {
-    const [mensaje, setMensaje] = useState({})
+    const [mensaje, setMensaje] = useState({});
     const [form, setForm] = useState({
         nombre: "",
         apellido: "",
@@ -13,7 +14,8 @@ export const RegisterCliente = () => {
         celular: "",
         email: "",
         password: ""
-    })
+    });
+
     // Estados para la longitud de los campos
     const [nombreLength, setNombreLength] = useState(0);
     const [apellidoLength, setApellidoLength] = useState(0);
@@ -31,8 +33,8 @@ export const RegisterCliente = () => {
             cedula: 10,
             direccion: 60,
             celular: 10,
-            email: 50, 
-            password: 20 
+            email: 50,
+            password: 20
         };
 
         // Validar si el campo de teléfono solo contiene números
@@ -79,56 +81,57 @@ export const RegisterCliente = () => {
         e.preventDefault();
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/registro`;
-    
+
             // Agregar el campo "role" al objeto form
             const formWithRole = {
                 ...form,
-                role_id: 3, 
+                role_id: 3,
             };
-    
+
             const respuesta = await axios.post(url, formWithRole);
-    
-            setMensaje({ 
-                respuesta: respuesta.data.msg || "Ya puedes iniciar sesión", 
-                tipo: true 
+
+            setMensaje({
+                respuesta: respuesta.data.msg || "Ya puedes iniciar sesión",
+                tipo: true
             });
             setForm({});
         } catch (error) {
             console.error("Error en la solicitud:", error);
             if (error.response) {
                 console.error("Respuesta del servidor con error:", error.response.data);
-                setMensaje({ 
-                    respuesta: error.response?.data.msg || "Respuesta erronea del servidor", 
-                    tipo: false 
+                setMensaje({
+                    respuesta: error.response?.data.msg || "Respuesta erronea del servidor",
+                    tipo: false
                 });
             } else if (error.request) {
                 console.error("No se recibió respuesta del servidor:", error.request);
-                setMensaje({ 
+                setMensaje({
                     respuesta: error.response?.data.msg || "No se recibió respuesta del servidor",
-                    tipo: false 
+                    tipo: false
                 });
             } else {
                 console.error("Error durante la solicitud:", error.message);
-                setMensaje({ 
+                setMensaje({
                     respuesta: error.response?.data.msg || "Error durante la solicitud",
-                    tipo: false 
+                    tipo: false
                 });
             }
         }
     };
-    
-    
+
     return (
         <>
             <div className="bg-white min-h-screen flex justify-center items-center">
-  <div className="w-full md:w-1/2 h-screen">
-    <div className="md:w-4/5 sm:w-full">
-      <h1 className="text-3xl font-semibold mb-2 text-center uppercase text-gray-500">Bienvenido</h1>
-      <small className="text-gray-400 block my-4 text-sm">Como propietario tienes la opción de poder rentar vehículos a 
-      nuestros clientes.
-      <br />Ingresa tus datos para poder registrarte:</small>
-      {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
-      <form onSubmit={handleSubmit}>
+                <div className="w-full md:w-1/2 h-screen">
+                    <div className="md:w-4/5 sm:w-full" style={{ margin: '20px auto 0' }}>
+                        <h1 className="text-3xl font-semibold mb-2 text-center uppercase text-gray-500">Bienvenido</h1>
+                        <small className="text-gray-400 block my-4 text-sm">
+                        Como cliente, tienes la posibilidad de alquilar cualquier vehículo que haya sido publicado por 
+                        la cantidad de días que tú desees.
+                            <br />Ingresa tus datos para poder registrarte:
+                        </small>
+                        {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
+                        <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label className="mb-2 block text-sm font-semibold" htmlFor="nombre">
                                 Nombre ({nombreLength}/30):
@@ -182,37 +185,31 @@ export const RegisterCliente = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="mb-2 block text-sm font-semibold" htmlFor="password">Contraseña ({passwordLength}/20): (Minimo 6 caracteres)</label>
+                            <label className="mb-2 block text-sm font-semibold" htmlFor="password">Contraseña ({passwordLength}/20): (Minimo 8 caracteres)</label>
                             <input type="password" id="password" name='password'
                                 value={form.password || ""} onChange={handleChange}
                                 placeholder="********************" className="block w-full rounded-md border border-gray-300 focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500" required />
                         </div>
-
-                        <div className="mb-3">
+                        
+                        <div className="mb-1">
                             <button className="bg-gray-500 text-slate-300 border py-2 w-full rounded-xl mt-5 hover:scale-105 duration-300 hover:bg-gray-900 hover:text-white">Registrar</button>
                         </div>
-                    </form>
-
-                    <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
-                        <hr className="border-gray-400" />
-                        <p className="text-center text-sm"></p>
-                        <hr className="border-gray-400" />
+                            <hr className="border-gray-400" />
+                            <hr className="border-gray-400" />
+                        <div className="mt-3 text-sm flex justify-between items-center">
+                            <p>¿Ya tienes una cuenta? Dirígete al login para poder iniciar sesión.</p>
+                            <Link to="/login" className="py-2 px-5 bg-gray-600 text-slate-300 border rounded-xl hover:scale-110 duration-300 hover:bg-gray-900 hover:text-white mr-4">Iniciar sesión</Link>
+                        </div>
+                        </form>
                     </div>
-
-      <div className="mt-3 text-sm flex justify-between items-center">
-        <p>¿Ya tienes una cuenta? Dirígete al login para poder iniciar sesión.</p>
-        <Link to="/login" className="py-2 px-5 bg-gray-600 text-slate-300 border rounded-xl hover:scale-110 duration-300 hover:bg-gray-900 hover:text-white mr-4">Iniciar sesión</Link>
-      </div>
-    </div>
-  </div>
-  <div
-  className={`hidden md:block w-full md:w-1/2 h-screen bg-cover bg-center bg-no-repeat float-right`}
-  style={{ backgroundImage: `url(${vehiculosCliente})` }}
-></div>
-
-</div>
-
+                </div>
+                <div
+                    className={`hidden sm:block w-full md:w-1/2 h-screen bg-cover bg-center bg-no-repeat float-right`}
+                    style={{ backgroundImage: `url(${vehiculosCliente})` }}
+                ></div>
+            </div>
         </>
-    )
-}
+    );
+};
+
 export default RegisterCliente;

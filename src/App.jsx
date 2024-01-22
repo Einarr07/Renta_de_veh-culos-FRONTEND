@@ -11,18 +11,17 @@ import UnAuthorized from './pages/UnAuthorized';
 import Restore from './pages/Restore';
 import { NotFound } from './pages/NotFound';
 import {PrivateRoute} from './routes/PrivateRoute'
+import { SolicitudesProvider } from './pages/SolicitudesContext';
 // Propietario
 import NavPropietario from './components/Propietario/NavPropietario';
-import  RegisterVehiculo  from './pages/RegisterVehiculo';
-import  EditVehiculo  from './pages/EditVehiculo';
-import { SolicitudesProvider } from './pages/SolicitudesContext';
+import  RegisterVehiculo  from './components/Propietario/RegisterVehiculo';
 // Administrador
 import NavAdministrador from './components/Administrador/NavAdministrador'
-import AceeptRequests from './pages/AceeptRequests';
+import AceeptRequests from './components/Administrador/AceeptRequests';
 // Cliente
 import NavCliente from './components/Cliente/NavCliente';
-import ViewVehiculo from './pages/ViewVehiculo';
-import ViewHistorialPedidos from './pages/ViewHistorialPedidos';
+import ViewVehiculo from './components/Cliente/ViewVehiculo';
+import ViewHistorialPedidos from './components/Cliente/ViewHistorialPedidos';
 
 function App() {
   return (
@@ -43,7 +42,6 @@ function App() {
               <PrivateRoute>
                 <NavPropietario/>
                 <Routes>
-                  <Route path='edit-vehiculo' element={<EditVehiculo />} />
                   <Route path='register-vehiculo' element={<RegisterVehiculo />} />
                 </Routes>
               </PrivateRoute>

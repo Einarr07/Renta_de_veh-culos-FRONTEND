@@ -27,16 +27,34 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Validaciones
+    if (!form.email || !form.password) {
+      setMensaje({ tipo: 'error', respuesta: 'Por favor, completa todos los campos.' });
+      return;
+    }
+  
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+    if (!emailRegex.test(form.email)) {
+      setMensaje({ tipo: 'error', respuesta: 'Por favor, introduce un correo electrónico válido.' });
+      return;
+    }
+  
+    if (form.password.length < 8) {
+      setMensaje({ tipo: 'error', respuesta: 'La contraseña debe tener al menos 8 caracteres.' });
+      return;
+    }
+  
     try {
       const url = `${import.meta.env.VITE_BACKEND_URL}/login`;
       const respuesta = await axios.post(url, form);
-
+  
       if (respuesta && respuesta.data) {
         localStorage.setItem('token', respuesta.data.token);
         localStorage.setItem('role', respuesta.data.role || '');
         setAuth(respuesta.data);
-
+  
         if (respuesta.data.role === 'propietario') {
           navigate('/propietario');
         } else if (respuesta.data.role === 'admin') {
@@ -49,8 +67,11 @@ const Login = () => {
       }
     } catch (error) {
       // Manejo de errores
+      console.error('Error al iniciar sesión:', error);
+      setMensaje({ tipo: 'error', respuesta: 'Error al iniciar sesión. Por favor, inténtalo de nuevo.' });
     }
   };
+  
 
   const handleRegisterClick = (role) => {
     setSelectedRole(role);
@@ -77,7 +98,9 @@ const Login = () => {
               Por favor ingresa tus datos
             </small>
             {Object.keys(mensaje).length > 0 && (
-              <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>
+              <Mensaje tipo={mensaje.tipo} className={mensaje.tipo === 'error' ? 'mensaje-error' : ''}>
+                {mensaje.respuesta}
+              </Mensaje>
             )}
             <form onSubmit={handleSubmit} className="w-full max-w-md">
               <div className="mb-3">

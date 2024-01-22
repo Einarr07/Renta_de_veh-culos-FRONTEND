@@ -38,10 +38,6 @@ export const Forgot = () => {
         {/* Formulario en el lado izquierdo */}
         <div className="bg-white flex justify-center items-center w-full md:w-1/2">
           <div className="md:w-4/5 sm:w-full">
-            {Object.keys(mensaje).length > 0 && (
-              <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>
-            )}
-
             <div className="text-center mt-16"> {/* Margen superior de 16 (ajusta según tu preferencia) y centrado verticalmente */}
               <h1 className="text-3xl font-semibold mb-2 uppercase text-gray-500">
                 ¿Olvidaste tu contraseña?
@@ -49,7 +45,9 @@ export const Forgot = () => {
               <small className="text-gray-400 block my-4 text-sm">
                 No te preocupes, por favor ingresa tus datos
               </small>
-
+              {Object.keys(mensaje).length > 0 && (
+                <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>
+              )}
               <form onSubmit={handleSubmit}>
                 <div className="mb-1">
                   <label className="mb-2 block text-sm font-semibold">
