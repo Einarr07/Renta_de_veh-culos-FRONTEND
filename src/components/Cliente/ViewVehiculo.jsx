@@ -17,7 +17,6 @@ const ViewVehiculo = () => {
     const fetchVehiculos = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log('Token:', token);
 
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/aceptados`, {
           headers: {

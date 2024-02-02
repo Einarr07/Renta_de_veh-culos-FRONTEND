@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { RiUserFill } from "react-icons/ri";
+import { AiOutlineBook } from "react-icons/ai";
 import logoImage from '../../assets/images/logo.png';
 import axios from "axios";
 
-const NavPropietario = () => {
+const NavAdministrador = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [nombreUsuario, setNombreUsuario] = useState('');
+    const [avatar, setAvatar] = useState(null); // Nuevo estado para almacenar el avatar
     const [showConfirmation, setShowConfirmation] = useState(false);
 
     useEffect(() => {
@@ -19,10 +22,9 @@ const NavPropietario = () => {
                     },
                 });
 
-                console.log('Respuesta del servidor:', respuesta.data);
-
-                // Extrae el nombre del usuario de la respuesta del servidor y actualiza el estado
+                // Extraer el nombre del usuario y el avatar de la respuesta del servidor y actualizar el estado
                 setNombreUsuario(respuesta.data.nombre);
+                setAvatar(respuesta.data.avatar);
             } catch (error) {
                 console.error('Error al obtener la información del usuario:', error);
             }
@@ -30,9 +32,9 @@ const NavPropietario = () => {
 
         obtenerUsuario();
     }, []);
-    
+
     const handleLogout = () => {
-        // Muestra el modal de confirmación
+        // Mostrar el modal de confirmación
         setShowConfirmation(true);
     };
 
@@ -63,13 +65,13 @@ const NavPropietario = () => {
             // Manejar errores de red u otros errores
             console.error('Error al cerrar sesión:', error);
         } finally {
-            // Cierra el modal de confirmación
+            // Cerrar el modal de confirmación
             setShowConfirmation(false);
         }
     };
 
     const cancelLogout = () => {
-        // Cancela el logout y cierra el modal de confirmación
+        // Cancelar el logout y cerrar el modal de confirmación
         setShowConfirmation(false);
     };
 
@@ -80,6 +82,8 @@ const NavPropietario = () => {
             backgroundColor: isSelected ? '#3FD7BB' : 'transparent',
             padding: '0.5rem 1rem',
             borderRadius: '0.5rem',
+            display: 'flex',
+            alignItems: 'center',
         };
     };
 
@@ -89,18 +93,34 @@ const NavPropietario = () => {
             backgroundColor: '#E53737',
             padding: '0.5rem 1rem',
             borderRadius: '0.5rem',
+            display: 'flex',
+            alignItems: 'center',
         };
     };
 
     return (
         <nav style={{ backgroundColor: '#3889B7' }} className="flex items-center justify-between p-5 bg-gray-800 text-white">
             <div className="logo m-5 flex items-center space-x-4">
-                <img src={logoImage} alt="Logo" className="h-8 w-8" /> 
+                <img src={logoImage} alt="Logo" className="h-8 w-8" />
             </div>
             <div className="flex items-center space-x-4">
-                <Link to="/admin/aceptar-solicitudes" style={getLinkStyles('/admin/aceptar-solicitudes')}>Aceptar Solicitudes</Link>
-                <div to="/admin/perfil" style={getLinkStyles('/admin/perfil')}>{nombreUsuario}</div>
-                {/* Enlace para abrir la confirmación */}
+                {/* Enlaces y Avatar/Icono de perfil */}
+                <Link to="/admin/aceptar-solicitudes" style={getLinkStyles('/admin/aceptar-solicitudes')}>
+                    <AiOutlineBook size={20} />
+                    <span className="ml-2">Aceptar Solicitudes</span>
+                </Link>
+                <Link to="/admin/perfil" style={getLinkStyles('/admin/perfil')}>
+                    <div className="avatar-container">
+                        {avatar ? (
+                            <img src={avatar} alt="Avatar" className="rounded-full h-8 w-8 avatar" />
+                        ) : (
+                            <RiUserFill size={20} />
+                        )}
+                    </div>
+                    <span className="sm:hidden">{nombreUsuario}</span>
+                </Link>
+                
+                {/* Botón de cierre de sesión */}
                 <button onClick={handleLogout} style={getLogoutStyles()}>Salir</button>
 
                 {/* Modal de confirmación */}
@@ -118,4 +138,4 @@ const NavPropietario = () => {
     );
 };
 
-export default NavPropietario;
+export default NavAdministrador;

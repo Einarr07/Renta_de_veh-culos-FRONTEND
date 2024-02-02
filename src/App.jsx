@@ -12,6 +12,7 @@ import Restore from './pages/Restore';
 import { NotFound } from './pages/NotFound';
 import {PrivateRoute} from './routes/PrivateRoute'
 import { SolicitudesProvider } from './pages/SolicitudesContext';
+import Update from './pages/Update'
 // Propietario
 import NavPropietario from './components/Propietario/NavPropietario';
 import  RegisterVehiculo  from './components/Propietario/RegisterVehiculo';
@@ -43,6 +44,7 @@ function App() {
                 <NavPropietario/>
                 <Routes>
                   <Route path='register-vehiculo' element={<RegisterVehiculo />} />
+                  <Route path='perfil' element={<Update/>} />
                 </Routes>
               </PrivateRoute>
             }
@@ -55,6 +57,7 @@ function App() {
                 <NavAdministrador/>
                 <Routes>
                   <Route path='aceptar-solicitudes' element={<AceeptRequests />} />
+                  <Route path='perfil' element={<Update/>} />
                 </Routes>
               </PrivateRoute>
             }
@@ -68,6 +71,7 @@ function App() {
                 <Routes>
                   <Route path='historial-pedidos' element={<ViewHistorialPedidos />} />
                   <Route path='vehiculos-en-alquiler' element={<ViewVehiculo />} />
+                  <Route path='perfil' element={<Update/>} />
                 </Routes>
               </PrivateRoute>
             }

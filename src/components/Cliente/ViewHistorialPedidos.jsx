@@ -53,8 +53,8 @@ const ViewHistorialPedidos = () => {
   };
 
   return (
-    <div className="text-center">
-      <h2>Historial de Pedidos</h2>
+    <div className="container mx-auto mt-5">
+      <h2 className="text-center mb-4 text-4xl font-bold">Historial de Pedidos</h2>
       {loading ? (
         <p>Cargando...</p>
       ) : historialPedidos.length === 0 ? (

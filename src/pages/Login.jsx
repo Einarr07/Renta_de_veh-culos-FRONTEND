@@ -68,7 +68,7 @@ const Login = () => {
     } catch (error) {
       // Manejo de errores
       console.error('Error al iniciar sesión:', error);
-      setMensaje({ tipo: 'error', respuesta: 'Error al iniciar sesión. Por favor, inténtalo de nuevo.' });
+      setMensaje({ tipo: 'error', respuesta: 'Error al iniciar sesión. Por favor, verifica tus credenciales.' });
     }
   };
   

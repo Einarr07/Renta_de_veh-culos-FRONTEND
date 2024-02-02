@@ -27,8 +27,7 @@ export const Forgot = () => {
         tipo: true });
       setMail("");
     } catch (error) {
-      setMensaje({ respuesta: error.response.data.msg || "Lo sentimos el usuario no se encuentra registrado", 
-      tipo: false });
+      setMensaje({ tipo: 'error', respuesta: error.response.data.msg || "Lo sentimos el usuario no se encuentra registrado" });
     }
   };
 
@@ -38,7 +37,7 @@ export const Forgot = () => {
         {/* Formulario en el lado izquierdo */}
         <div className="bg-white flex justify-center items-center w-full md:w-1/2">
           <div className="md:w-4/5 sm:w-full">
-            <div className="text-center mt-16"> {/* Margen superior de 16 (ajusta según tu preferencia) y centrado verticalmente */}
+            <div className="text-center mt-16"> 
               <h1 className="text-3xl font-semibold mb-2 uppercase text-gray-500">
                 ¿Olvidaste tu contraseña?
               </h1>
@@ -84,8 +83,10 @@ export const Forgot = () => {
           </div>
         </div>
 
-        {/* Imagen a la derecha en pantallas medianas y más grandes */}
-        <div className="hidden sm:block w-full md:w-1/2 h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${llavesForgot})` }}></div>
+        
+        <div className="hidden sm:block w-full md:w-1/2 h-screen bg-cover bg-center bg-no-repeat" 
+          style={{ backgroundImage: `url(${llavesForgot})` }}>
+        </div>
       </div>
     </>
   );
