@@ -54,6 +54,10 @@ const ViewVehiculo = () => {
 
   const handleConfirmRent = async () => {
     try {
+      if(duracionContrato <= 0){
+        console.error('La duración del contrato debe ser un número positivo.');
+        return;
+      }
       const token = localStorage.getItem('token');
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/contratos/${selectedVehiculo.id}/${duracionContrato}`,

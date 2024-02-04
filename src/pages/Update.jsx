@@ -139,7 +139,7 @@ const Update = () => {
       console.log("Respuesta del servidor:", error.response?.data);
       setMensaje({
         respuesta: error.response?.data.message || "Error al actualizar el perfil",
-        tipo: false,
+        tipo: 'error',
       });
     }
   };

@@ -101,19 +101,19 @@ export const RegisterPropietario = () => {
                 console.error("Respuesta del servidor con error:", error.response.data);
                 setMensaje({
                     respuesta: error.response?.data.msg || "Respuesta erronea del servidor",
-                    tipo: false
+                    tipo: 'error'
                 });
             } else if (error.request) {
                 console.error("No se recibió respuesta del servidor:", error.request);
                 setMensaje({
                     respuesta: error.response?.data.msg || "No se recibió respuesta del servidor",
-                    tipo: false
+                    tipo: 'error'
                 });
             } else {
                 console.error("Error durante la solicitud:", error.message);
                 setMensaje({
                     respuesta: error.response?.data.msg || "Error durante la solicitud",
-                    tipo: false
+                    tipo: 'error'
                 });
             }
         }
