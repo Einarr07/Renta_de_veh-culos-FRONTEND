@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useState } from "react";
 import Mensaje from '../Alertas/Mensaje';
-import { useSolicitudes } from '../../pages/SolicitudesContext';
 
 const RegisterVehiculo = () => {
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [hideSuccessMessage, setHideSuccessMessage] = useState(true);
+  const [hideErrorMessage, setHideErrorMessage] = useState(true);
   const [vehiculoData, setVehiculoData] = useState({
     tipo_vehiculo: "",
     marca: "",
@@ -18,6 +19,7 @@ const RegisterVehiculo = () => {
   });
   const [mensaje, setMensaje] = useState({});
   const [descripcion, setDescripcion] = useState(0);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,6 +86,10 @@ const RegisterVehiculo = () => {
     const file = e.target.files[0];
     if (file && file.size <= 2097152) {
       setVehiculoData((prevData) => ({ ...prevData, image_url: file }));
+
+      
+      const imageURL = URL.createObjectURL(file);
+      setImagePreview(imageURL);
     } else {
       console.error("El archivo es demasiado grande");
     }
@@ -92,77 +98,115 @@ const RegisterVehiculo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const autenticado = localStorage.getItem('token');
-  
+
     try {
       const formData = new FormData();
-      formData.append("tipo_vehiculo", vehiculoData.tipo_vehiculo);
-      formData.append("marca", vehiculoData.marca);
-      formData.append("placas", vehiculoData.placas);
-      formData.append("numero_pasajero", vehiculoData.numero_pasajero);
-      formData.append("image_url", vehiculoData.image_url);
-      formData.append("costo_alquiler", vehiculoData.costo_alquiler);
-      formData.append("contacto", vehiculoData.contacto);
-      formData.append("descripcion", vehiculoData.descripcion);
+      formData.append('tipo_vehiculo', vehiculoData.tipo_vehiculo);
+      formData.append('marca', vehiculoData.marca);
+      formData.append('placas', vehiculoData.placas);
+      formData.append('numero_pasajero', vehiculoData.numero_pasajero);
+      formData.append('image_url', vehiculoData.image_url);
+      formData.append('costo_alquiler', vehiculoData.costo_alquiler);
+      formData.append('contacto', vehiculoData.contacto);
+      formData.append('descripcion', vehiculoData.descripcion);
 
       const url = `${import.meta.env.VITE_BACKEND_URL}/vehiculos`;
       const respuesta = await axios.post(url, formData, {
         headers: {
           Authorization: `Bearer ${autenticado}`,
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
-      });      
-  
+      });
+
       setVehiculoData({
-        tipo_vehiculo: "",
-        marca: "",
-        placas: "",
+        tipo_vehiculo: '',
+        marca: '',
+        placas: '',
         numero_pasajero: 0,
         image_url: null,
         costo_alquiler: 0,
-        contacto: "",
-        descripcion: "",
+        contacto: '',
+        descripcion: '',
       });
 
-      console.log("Respuesta del servidor:", respuesta.data);
+      console.log('Respuesta del servidor:', respuesta.data);
 
-      setSuccessMessage('¡Su vehículo fue registrado exitosamente!');
-      setHideSuccessMessage(false);
+      if (respuesta.data.success) {
+        // Si el servidor devuelve un mensaje de éxito, lo usamos
+        setSuccessMessage('Vehículo registrado exitosamente');
+        setHideSuccessMessage(false);
 
-      setTimeout(() => {
-        setHideSuccessMessage(true);
-      }, 3000);
+        setTimeout(() => {
+          setHideSuccessMessage(true);
+        }, 3000);
+      } else {
+        // Si el servidor devuelve un mensaje de error, lo mostramos
+        setErrorMessage('Error al registrar un vehículo, verifica los campos');
+        setHideErrorMessage(false);
 
-    } catch (error) {
-      console.error("Error en la solicitud:", error);
-      if (error.response) {
-        console.error("Respuesta del servidor con error:", error.response.data);
+        setTimeout(()=>{
+          setHideErrorMessage(true);
+        }, 3000);
         setMensaje({
-          respuesta: error.response?.data.msg || "Respuesta erronea del servidor",
+          respuesta: respuesta.data.message || 'Error desconocido del servidor',
+          tipo: false,
+        });
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+      if (error.response) {
+        console.error('Respuesta del servidor con error:', error.response.data);
+        setFalseMesaage('Error al registrar un vehículo');
+        setMensaje({
+          respuesta: error.response?.data.message || 'Respuesta erronea del servidor',
           tipo: false,
         });
       } else if (error.request) {
-        console.error("No se recibió respuesta del servidor:", error.request);
+        console.error('No se recibió respuesta del servidor:', error.request);
+        setFalseMesaage('Error al registrar un vehículo');
         setMensaje({
-          respuesta: error.response?.data.msg || "No se recibió respuesta del servidor",
+          respuesta: error.response?.data.message || 'No se recibió respuesta del servidor',
           tipo: false,
         });
       } else {
-        console.error("Error durante la solicitud:", error.message);
+        console.error('Error durante la solicitud:', error.message);
+        setFalseMesaage('Error al registrar un vehículo');
         setMensaje({
-          respuesta: error.response?.data.msg || "Error durante la solicitud",
+          respuesta: error.response?.data.message || 'Error durante la solicitud',
           tipo: false,
         });
       }
     }
   };
   
+  
   return (
     <>
       <div className="container mx-auto mt-5">
         <h2 className="text-center mb-4 text-4xl font-bold">Nuevo vehículo</h2>
-        {mensaje.tipo && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
+        {mensaje.tipo && (
+          <div className="mensaje flex justify-center items-center h-screen">
+            <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>
+          </div>
+        )}
+
+        {successMessage && !hideSuccessMessage && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <p style={{ color: 'green', textAlign: 'center' }}>{successMessage}</p>
+            </div>
+          </div>
+        )}
+
+        {errorMessage && !hideErrorMessage && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <p style={{ color: 'red', textAlign: 'center' }}>{errorMessage}</p>
+            </div>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
           <div className="mb-4">
             <label htmlFor="tipo_vehiculo" className="block text-sm font-medium text-gray-600">
@@ -218,14 +262,6 @@ const RegisterVehiculo = () => {
               <option value="Suzuki">Suzuki</option>
             </select>
           </div>
-  
-          {successMessage && !hideSuccessMessage && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <p style={{ color: 'green', textAlign: 'center' }}>{successMessage}</p>
-          </div>
-        </div>
-      )}
 
           <div className="mb-4">
             <label htmlFor="placas" className="block text-sm font-medium text-gray-600">
@@ -272,6 +308,13 @@ const RegisterVehiculo = () => {
               accept="image/*"
               maxfilesize={2048 * 1024 * 1024}  // 2 MB en bytes
             />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Vista previa de la imagen"
+                className="mt-2 max-w-full h-auto"
+              />
+            )}
           </div>
   
           <div className="mb-4">

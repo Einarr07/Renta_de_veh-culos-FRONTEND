@@ -20,50 +20,6 @@ const Update = () => {
   const [direccionLength, setDireccionLength] = useState(0);
   const [celularLength, setCelularLength] = useState(0);
 
-  // Nuevo estado para el avatar
-  const [avatar, setAvatar] = useState(null);
-  const [avatarFile, setAvatarFile] = useState(null);
-
-  // Función para manejar el cambio en la imagen del avatar
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    setAvatarFile(file);
-
-    // Previsualizar la imagen (opcional)
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setAvatar(reader.result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // Función para enviar la imagen del avatar al servidor
-  const uploadAvatar = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("avatar", avatarFile);
-
-      const autenticado = localStorage.getItem("token");
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/update`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${autenticado}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      // Manejar la respuesta del servidor (puedes mostrar un mensaje de éxito, etc.)
-      console.log("Respuesta del servidor al subir el avatar:", response.data);
-    } catch (error) {
-      console.error("Error al subir el avatar:", error);
-    }
-  };
-
   // Función para obtener el usuario
   const obtenerUsuario = async () => {
     try {
@@ -73,28 +29,28 @@ const Update = () => {
           Authorization: `Bearer ${autenticado}`
         }
       });
-  
+
       console.log("Respuesta del backend:", respuesta.data);
-  
+
       const { nombre, apellido, cedula, direccion, celular, email } = respuesta.data;
       const id = respuesta.data.id;
-  
+
       console.log("ID del usuario:", id);
-  
+
       setNombreUsuario(nombre);
       setApellidoUsuario(apellido);
       setCedulaUsuario(cedula);
       setDireccionUsuario(direccion);
       setCelularUsuario(celular);
       setEmailUsuario(email);
-  
+
       // Actualizar la longitud de los campos
       setNombreLength(nombre.length);
       setApellidoLength(apellido.length);
       setCedulaLength(cedula.length);
       setDireccionLength(direccion.length);
       setCelularLength(celular.length);
-  
+
       // Retorna el userId junto con otros datos del usuario
       return { id, ...respuesta.data };
     } catch (error) {
@@ -144,54 +100,49 @@ const Update = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const autenticado = localStorage.getItem('token');
-  
+
       if (!userId) {
         console.error("No se pudo obtener el ID del usuario");
         return;
       }
-  
-      const url = `${import.meta.env.VITE_BACKEND_URL}/update`;
-  
+
+      const url = `${import.meta.env.VITE_BACKEND_URL}/update/${userId}`;
+
       const data = {
         nombre: nombreUsuario,
         apellido: apellidoUsuario,
         direccion: direccionUsuario,
         celular: celularUsuario,
-        avatar: avatar, // Agregar el avatar al objeto de datos
+        cedula: cedulaUsuario,
+        email: emailUsuario
       };
-  
+
       console.log("Datos a enviar:", data);
-  
+
       const respuesta = await axios.put(url, data, {
         headers: {
           Authorization: `Bearer ${autenticado}`,
         },
       });
-  
+
       console.log("Respuesta del backend al actualizar:", respuesta.data);
-  
+
       setMensaje({
         respuesta: respuesta.data.message || "Perfil actualizado correctamente",
         tipo: true,
       });
-
-      // Subir el avatar después de actualizar el perfil
-      if (avatarFile) {
-        await uploadAvatar();
-      }
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
-      console.log("Respuesta del servidor:", error.response.data); // Agrega esta línea para obtener más detalles
+      console.log("Respuesta del servidor:", error.response?.data);
       setMensaje({
         respuesta: error.response?.data.message || "Error al actualizar el perfil",
         tipo: false,
       });
     }
   };
-
 
   return (
     <>
@@ -233,26 +184,6 @@ const Update = () => {
               placeholder="Ingresa tu cédula" className="block w-full rounded-md border border-gray-300 focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500"
               disabled // Deshabilitar la edición
             />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="avatarUsuario" className="mb-2 block text-sm font-semibold">
-              Avatar:
-            </label>
-            <input
-              type="file"
-              id="avatarUsuario"
-              name="avatarUsuario"
-              accept="image/*"
-              onChange={handleAvatarChange}
-              className="mt-1 p-2 w-full border rounded-md"
-            />
-            {avatar && (
-              <img
-                src={avatar}
-                alt="Avatar preview"
-                className="mt-2 rounded-full h-20 w-20 object-cover"
-              />
-            )}
           </div>
           <div className="mb-4">
             <label htmlFor="direccionUsuario" className="mb-2 block text-sm font-semibold">Dirección ({direccionLength}/60):</label>

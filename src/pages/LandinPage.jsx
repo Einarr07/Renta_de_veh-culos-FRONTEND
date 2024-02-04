@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 // Importación de imágenes
-import logoImage from '../assets/images/logo.png';
+import logoImage from '../assets/images/logo2.jpeg';
 import car1Image from '../assets/images/car_img1.png';
 import car2Image from '../assets/images/car_img2.png';
 import car3Image from '../assets/images/car_img3.png';

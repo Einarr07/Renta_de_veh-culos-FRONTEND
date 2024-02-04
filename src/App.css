@@ -593,6 +593,15 @@ video {
   height: auto;
 }
 
+/* Logo */
+.logo {
+  max-width: 150px; /* Ajusta el valor según tus preferencias */
+  height: auto; /* La altura se ajustará automáticamente manteniendo la proporción original */
+  border-radius: 50px; /* Puedes ajustar el valor de border-radius según tu preferencia */
+  display: block; /* Asegura que la imagen se muestre como un bloque en lugar de un elemento en línea */
+  margin: auto; /* Centra la imagen en la pantalla */
+}
+
 /* Make elements with the HTML hidden attribute stay hidden by default */
 
 [hidden] {
@@ -755,16 +764,39 @@ video {
 
 /*Navegación */
 
-/* Estilos de navegación compartidos para pantallas pequeñas */
+.nav-links {
+  display: flex;
+  flex-direction: row; /* Establece la dirección a fila (horizontal) */
+  align-items: center;
+}
+
+.nav-links a {
+  color: 'black';
+  padding: '0.5rem 1rem';
+  display: 'flex';
+  align-items: 'center';
+}
+
+.nav-links a:hover {
+  color: 'white';
+}
+
+.nav-links a.selected {
+  color: 'white';
+  background-color: '#3FD7BB';
+  border-radius: '0.5rem';
+}
+
+/* Estilos específicos para pantallas pequeñas */
 @media (max-width: 640px) {
   .nav-links {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem; /* Agrega un espacio entre los enlaces en pantallas pequeñas */
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
   }
 
   .nav-links a {
-    margin-bottom: 0.5rem; /* Ajusta el espacio entre los enlaces en pantallas pequeñas */
+      margin-bottom: 0.5rem;
   }
 }
 

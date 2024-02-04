@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HiOutlineLogout } from "react-icons/hi";
-import { IoMdPerson } from "react-icons/io";
 import { AiOutlineHistory, AiOutlineCar } from "react-icons/ai";
-import { RiUserFill } from "react-icons/ri"; // Importar el icono de perfil genérico
-import logoImage from '../../assets/images/logo.png';
+import { RiUserFill } from "react-icons/ri"; 
+import logoImage from '../../assets/images/logo.jpeg';
 import axios from "axios";
 
 const NavCliente = () => {
@@ -13,19 +12,6 @@ const NavCliente = () => {
     const [nombreUsuario, setNombreUsuario] = useState('');
     const [avatar, setAvatar] = useState(null); // Nuevo estado para almacenar el avatar
     const [showConfirmation, setShowConfirmation] = useState(false);
-
-    // Función para obtener estilos de enlace activo
-    const getLinkStyles = (path) => {
-        const isSelected = location.pathname === path;
-        return {
-            color: isSelected ? 'white' : 'black',
-            backgroundColor: isSelected ? '#3FD7BB' : 'transparent',
-            padding: '0.5rem 1rem',
-            borderRadius: '0.5rem',
-            display: 'flex',
-            alignItems: 'center',
-        };
-    };
 
     // Efecto secundario para obtener información del usuario al cargar el componente
     useEffect(() => {
@@ -93,6 +79,19 @@ const NavCliente = () => {
         setShowConfirmation(false);
     };
 
+    // Función para obtener estilos de enlace activo
+    const getLinkStyles = (path) => {
+        const isSelected = location.pathname === path;
+        return {
+            color: isSelected ? 'white' : 'black',
+            backgroundColor: isSelected ? '#3FD7BB' : 'transparent',
+            padding: '0.5rem 1rem',
+            borderRadius: '0.5rem',
+            display: 'flex',
+            alignItems: 'center',
+        };
+    };
+    
     // Obtener estilos del botón de cierre de sesión
     const getLogoutStyles = () => {
         return {
@@ -100,15 +99,17 @@ const NavCliente = () => {
             backgroundColor: '#E53737',
             padding: '0.5rem 1rem',
             borderRadius: '0.5rem',
+            display: 'flex',
+            alignItems: 'center',
         };
     };
 
     return (
-        <nav style={{ backgroundColor: '#3889B7' }} className="flex flex-col sm:flex-row items-center justify-between p-5 bg-gray-800 text-white">
+        <nav style={{ backgroundColor: '#3889B7' }} className="flex items-center justify-between p-5 bg-gray-800 text-white">
             <div className="logo m-3 flex items-center space-x-4">
                 <img src={logoImage} alt="Logo" className="h-8 w-8" />
             </div>
-            <div className="flex items-center space-x-4 sm:space-x-8">
+            <div className="flex items-center space-x-4">
                 {/* Enlaces a las distintas secciones y Avatar/Icono de perfil */}
                 <div className="nav-links">
                     <Link to="/cliente/historial-pedidos" style={getLinkStyles('/cliente/historial-pedidos')}>

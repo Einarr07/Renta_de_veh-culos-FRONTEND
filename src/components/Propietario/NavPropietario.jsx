@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { RiUserFill } from "react-icons/ri";
-import { AiOutlineCar } from "react-icons/ai"; // Importa el ícono de vehículo
-import logoImage from '../../assets/images/logo.png';
+import { AiOutlineCar } from "react-icons/ai";
+import logoImage from '../../assets/images/logo.jpeg';
 import axios from 'axios';
+import { HiOutlineLogout } from "react-icons/hi";
 
 const NavPropietario = () => {
     const location = useLocation();
@@ -86,7 +87,7 @@ const NavPropietario = () => {
             alignItems: 'center',
         };
     };
-
+    
     const getLogoutStyles = () => {
         return {
             color: 'white',
@@ -100,28 +101,30 @@ const NavPropietario = () => {
 
     return (
         <nav style={{ backgroundColor: '#3889B7' }} className="flex items-center justify-between p-5 bg-gray-800 text-white">
-            <div className="logo m-4 flex items-center space-x-4">
+            <div className="logo m-3 flex items-center space-x-4">
                 <img src={logoImage} alt="Logo" className="h-8 w-8" />
             </div>
             <div className="flex items-center space-x-4">
                 {/* Enlaces y Avatar/Icono de perfil */}
-                <Link to="/propietario/register-vehiculo" style={getLinkStyles('/propietario/register-vehiculo')}>
-                    <AiOutlineCar size={20} />
-                    <span className="ml-2">Registrar un vehículo</span>
-                </Link>
-                <Link to="/propietario/perfil" style={getLinkStyles('/propietario/perfil')}>
-                    <div className="avatar-container">
-                        {avatar ? (
-                            <img src={avatar} alt="Avatar" className="rounded-full h-8 w-8 avatar" />
-                        ) : (
-                            <RiUserFill size={20} />
-                        )}
-                    </div>
-                    <span className="sm:hidden">{nombreUsuario}</span>
-                </Link>
+                <div className="nav-links">
+                    <Link to="/propietario/register-vehiculo" style={getLinkStyles('/propietario/register-vehiculo')}>
+                        <AiOutlineCar size={20} />
+                        <span className="ml-2">Registrar un vehículo</span>
+                    </Link>
+                    <Link to="/propietario/perfil" style={getLinkStyles('/propietario/perfil')}>
+                        <div className="avatar-container">
+                            {avatar ? (
+                                <img src={avatar} alt="Avatar" className="rounded-full h-8 w-8 avatar" />
+                            ) : (
+                                <RiUserFill size={20} />
+                            )}
+                        </div>
+                        <span className="sm:hidden">{nombreUsuario}</span>
+                    </Link>
 
-                {/* Botón de cierre de sesión */}
-                <button onClick={handleLogout} style={getLogoutStyles()}>Salir</button>
+                    {/* Botón de cierre de sesión */}
+                    <button onClick={handleLogout} style={getLogoutStyles()}><HiOutlineLogout/> Salir</button>
+                </div>
 
                 {/* Modal de confirmación */}
                 {showConfirmation && (
