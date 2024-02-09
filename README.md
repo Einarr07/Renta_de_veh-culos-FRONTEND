@@ -19,7 +19,6 @@ La aplicación web cuenta con los siguientes perfiles de usuario:
   <li>El usuario propietario puede registrar un vehículo</li>
 </ul>
 
-Registro del vehículo
 ![image](https://github.com/Einarr07/Renta_de_vehiculos-FRONTEND/assets/96399138/c0f9f041-4abb-4bd7-970f-34909b4d1ac0)
 
 # Funcionalidades del usuario administrador
