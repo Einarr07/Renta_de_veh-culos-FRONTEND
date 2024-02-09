@@ -42,7 +42,5 @@ El siguiente video muestra el manual de la página web y el flujo de proceso par
 [Video explicativo](https://www.youtube.com/watch?v=IXywkaym-kw)
 
 ---
-<div style="text-align: rigth; font-size: 14px; color: #333;">
-  Elaborado por Mateo Congo
-  Periodo: 2023-2024
-</div>
+<p aling="right">Elaborado por Mateo Congo</p>
+<p aling="right">Periodo: 2023-2024</p>
