@@ -2,7 +2,6 @@
 
 # Componente Frontend
 
-<br></br>
 
 # Sobre el proyecto
 <br></br>
