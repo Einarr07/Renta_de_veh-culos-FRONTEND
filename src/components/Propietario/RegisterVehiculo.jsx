@@ -306,7 +306,7 @@ const RegisterVehiculo = () => {
   
           <div className="mb-4">
             <label htmlFor="image_url" className="block text-sm font-medium text-gray-600">
-              Imagen (MAX 2MB)  Nota: No se admiten archivos .webp
+              Imagen (MAX 2MB)  Nota: No se admiten archivos .webp, .avif
             </label>
             <input
               type="file"
