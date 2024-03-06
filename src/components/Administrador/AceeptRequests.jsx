@@ -52,6 +52,7 @@ const AceeptRequests = () => {
       );
       console.log('Solicitud de aceptación exitosa');
       obtenerVehiculosPendientes(); // Actualiza la lista después de aceptar
+      window.alert('Vehículo aceptado');
     } catch (error) {
       console.error('Error al aceptar la solicitud:', error);
     }
@@ -71,10 +72,12 @@ const AceeptRequests = () => {
       );
       console.log('Solicitud de rechazo exitosa');
       obtenerVehiculosPendientes(); // Actualiza la lista después de rechazar
+      window.alert('Vehículo rechazado');
     } catch (error) {
       console.error('Error al rechazar la solicitud:', error);
     }
   };
+
 
   const handleShowMoreInfo = (vehiculo) => {
     setSelectedVehiculo(vehiculo);

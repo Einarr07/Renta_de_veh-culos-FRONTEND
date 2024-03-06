@@ -28,13 +28,19 @@ const RegisterVehiculo = () => {
     switch (name) {
       case "tipo_vehiculo":
       case "marca":
-        case "placas":
-          if (newValue.length <= 8) {
-            setVehiculoData((prevData) => {
-              return { ...prevData, [name]: newValue.toUpperCase() };
-            });
-          }
-          break;
+        setVehiculoData((prevData) => {
+          return { ...prevData, [name]: newValue };
+        });
+        break;
+      case "placas":
+        const maxLengthPlacas = 8;
+        if (newValue.length <= maxLengthPlacas) {
+          setVehiculoData((prevData) => {
+            return { ...prevData, [name]: newValue };
+          });
+        }
+        break;
+        
   
       case "numero_pasajero":
         const parsedValue = parseInt(newValue, 10) || 0;
@@ -267,7 +273,7 @@ const RegisterVehiculo = () => {
 
           <div className="mb-4">
             <label htmlFor="placas" className="block text-sm font-medium text-gray-600">
-              Placas del vehículo ({8 - vehiculoData.placas.length} caracteres restantes)
+              Placas del vehículo ({vehiculoData.placas.length}/8)
             </label>
             <input
               type="text"
@@ -300,7 +306,7 @@ const RegisterVehiculo = () => {
   
           <div className="mb-4">
             <label htmlFor="image_url" className="block text-sm font-medium text-gray-600">
-              Imagen MAX (2MB)
+              Imagen (MAX 2MB)  Nota: No se admiten archivos .webp
             </label>
             <input
               type="file"
