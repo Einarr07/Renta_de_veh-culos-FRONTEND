@@ -28,11 +28,13 @@ const RegisterVehiculo = () => {
     switch (name) {
       case "tipo_vehiculo":
       case "marca":
-      case "placas":
-        setVehiculoData((prevData) => {
-          return { ...prevData, [name]: newValue };
-        });
-        break;
+        case "placas":
+          if (newValue.length <= 8) {
+            setVehiculoData((prevData) => {
+              return { ...prevData, [name]: newValue.toUpperCase() };
+            });
+          }
+          break;
   
       case "numero_pasajero":
         const parsedValue = parseInt(newValue, 10) || 0;
@@ -265,7 +267,7 @@ const RegisterVehiculo = () => {
 
           <div className="mb-4">
             <label htmlFor="placas" className="block text-sm font-medium text-gray-600">
-              Placas del vehículo
+              Placas del vehículo ({8 - vehiculoData.placas.length} caracteres restantes)
             </label>
             <input
               type="text"
@@ -319,7 +321,7 @@ const RegisterVehiculo = () => {
   
           <div className="mb-4">
             <label htmlFor="costo_alquiler" className="block text-sm font-medium text-gray-600">
-              Costo de alquiler
+              Costo de alquiler (por día)
             </label>
             <input
               type="number" // Cambié el tipo de entrada a 'number'
